@@ -19,9 +19,9 @@ Free, and the three work together.
 
 <table>
 <tr>
-<td width="33%" align="center"><a href="#-hud-fit"><img src="docs/img/hudfit.jpg" alt="HUD Fit"></a><br><b>HUD Fit</b><br><sub>De-stretch, scale and move the HUD</sub></td>
+<td width="33%" align="center"><a href="#-hud-fit"><img src="docs/img/shots/hudfit_20261003084800_1.jpg" alt="HUD Fit editor with element outlines"></a><br><b>HUD Fit</b><br><sub>De-stretch, scale and move the HUD</sub></td>
 <td width="33%" align="center"><a href="#-43-video"><img src="docs/img/aspect43.jpg" alt="4:3 Video"></a><br><b>4:3 Video</b><br><sub>4x3 aspect ratio in the video settings</sub></td>
-<td width="33%" align="center"><a href="#-hero-select-plus"><img src="docs/img/heroselect.jpg" alt="Hero Select Plus"></a><br><b>Hero Select Plus</b><br><sub>Hero names, classes, search and filters</sub></td>
+<td width="33%" align="center"><a href="#-hero-select-plus"><img src="docs/img/shots/heroselect_grid.jpg" alt="Hero Select Plus on the hero select screen"></a><br><b>Hero Select Plus</b><br><sub>Hero names, classes, search and filters</sub></td>
 </tr>
 </table>
 
