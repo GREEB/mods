@@ -458,7 +458,8 @@ def badge_text(t):
 
 
 def update_readme(versions):
-    """Fills the <!--dl:key--> markers in README.md with a download button for the current version."""
+    """Fills the <!--dl:key--> markers in README.md with a download button for the current version.
+    The markers sit on their own lines: GitHub shows a line that starts with an HTML comment as raw HTML."""
     path = os.path.join(HERE, "README.md")
     text = open(path, encoding="utf-8").read()
     for m in MODS:
@@ -467,7 +468,7 @@ def update_readme(versions):
         badge = ("[![%s](https://img.shields.io/badge/%s-%s-%s?style=for-the-badge)](%sdownloads/%s)"
                  % (label, badge_text("Download"), badge_text("%s v%s" % (m["name"], version)),
                     m["accent"].lstrip("#"), SITE, zipname))
-        text = re.sub(r"<!--dl:%s-->.*?<!--/dl-->" % m["key"], lambda _: "<!--dl:%s-->%s<!--/dl-->" % (m["key"], badge),
+        text = re.sub(r"<!--dl:%s-->.*?<!--/dl-->" % m["key"], lambda _: "<!--dl:%s-->\n\n%s\n\n<!--/dl-->" % (m["key"], badge),
                       text, flags=re.S)
     with open(path, "w", encoding="utf-8") as f:
         f.write(text)

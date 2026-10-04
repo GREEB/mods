@@ -36,7 +36,11 @@ resolution (16:9, 16:10, 5:4, 21:9). Playing stretched makes the HUD look wide a
 Fit makes it look right again. You can also make the UI bigger or smaller, or move pieces of it out
 of the way.
 
-<!--dl:hudfit-->[![Download HUD Fit v1.2.1](https://img.shields.io/badge/Download-HUD%20Fit%20v1.2.1-ffc83c?style=for-the-badge)](https://greeb.github.io/mods/downloads/hud_fit_v1.2.1.zip)<!--/dl-->
+<!--dl:hudfit-->
+
+[![Download HUD Fit v1.2.1](https://img.shields.io/badge/Download-HUD%20Fit%20v1.2.1-ffc83c?style=for-the-badge)](https://greeb.github.io/mods/downloads/hud_fit_v1.2.1.zip)
+
+<!--/dl-->
 
 | Before: the stock HUD at 4:3 stretched | After: de-stretched and resized with HUD Fit |
 |:---:|:---:|
@@ -87,7 +91,11 @@ This mod adds a **4x3** choice to **Settings → Video → Aspect Ratio**, next 
 Pick it and the resolution list shows the 4:3 resolutions your graphics driver offers, for example
 1600x1200, 1440x1080 or 1280x960.
 
-<!--dl:aspect43-->[![Download 4:3 Video v2.0](https://img.shields.io/badge/Download-4%3A3%20Video%20v2.0-b48cff?style=for-the-badge)](https://greeb.github.io/mods/downloads/aspect_4x3_v2.0.zip)<!--/dl-->
+<!--dl:aspect43-->
+
+[![Download 4:3 Video v2.0](https://img.shields.io/badge/Download-4%3A3%20Video%20v2.0-b48cff?style=for-the-badge)](https://greeb.github.io/mods/downloads/aspect_4x3_v2.0.zip)
+
+<!--/dl-->
 
 - **Never hides new settings.** Older 4:3 mods ship a whole copy of the settings screen, which hides
   every setting added since. This one only adds the button.
@@ -104,7 +112,11 @@ Pick it and the resolution list shows the 4:3 resolutions your graphics driver o
 
 Hero Select Plus makes the hero select screen easier to read, especially for new players.
 
-<!--dl:heroselect-->[![Download Hero Select Plus v1.0](https://img.shields.io/badge/Download-Hero%20Select%20Plus%20v1.0-4fd1c5?style=for-the-badge)](https://greeb.github.io/mods/downloads/hero_select_plus_v1.0.zip)<!--/dl-->
+<!--dl:heroselect-->
+
+[![Download Hero Select Plus v1.0](https://img.shields.io/badge/Download-Hero%20Select%20Plus%20v1.0-4fd1c5?style=for-the-badge)](https://greeb.github.io/mods/downloads/hero_select_plus_v1.0.zip)
+
+<!--/dl-->
 
 <img src="docs/img/shots/heroselect_grid.jpg" alt="Hero Select Plus: classes, search and filters on the Deadlock hero select screen">
 
