@@ -40,7 +40,7 @@ of the way.
 
 | Before: the stock HUD at 4:3 stretched | After: de-stretched and resized with HUD Fit |
 |:---:|:---:|
-| <img src="docs/img/shots/hudfit_1.jpg" alt="Deadlock HUD stretched at 4:3"> | <img src="docs/img/shots/hudfit_2.jpg" alt="Deadlock HUD de-stretched with HUD Fit"> |
+| <img src="docs/img/shots/hudfit_20261003085728_1.jpg" alt="Deadlock HUD stretched at 4:3"> | <img src="docs/img/shots/hudfit_20261003085833_1.jpg" alt="Deadlock HUD de-stretched with HUD Fit"> |
 
 ### Features
 
@@ -67,13 +67,13 @@ Hero Testing match is the best place to use it.
 <br>
 
 **The editor opens over the live HUD**
-<img src="docs/img/shots/hudfit_3.jpg" alt="HUD Fit editor in Deadlock">
+<img src="docs/img/shots/hudfit_20261003082723_1.jpg" alt="HUD Fit editor in Deadlock">
 
 **Layers: show, hide, lock or reset every element**
-<img src="docs/img/shots/hudfit_4.jpg" alt="HUD Fit layers panel">
+<img src="docs/img/shots/hudfit_20261003085741_1.jpg" alt="HUD Fit layers panel">
 
 **Show all outlines: every element you can move and resize**
-<img src="docs/img/shots/hudfit_5.jpg" alt="HUD Fit element outlines">
+<img src="docs/img/shots/hudfit_20261003084800_1.jpg" alt="HUD Fit element outlines">
 
 </details>
 
@@ -106,7 +106,7 @@ Hero Select Plus makes the hero select screen easier to read, especially for new
 
 <!--dl:heroselect-->[![Download Hero Select Plus v1.0](https://img.shields.io/badge/Download-Hero%20Select%20Plus%20v1.0-4fd1c5?style=for-the-badge)](https://greeb.github.io/mods/downloads/hero_select_plus_v1.0.zip)<!--/dl-->
 
-<img src="docs/img/shots/heroselect_1.jpg" alt="Hero Select Plus: classes, search and filters on the Deadlock hero select screen">
+<img src="docs/img/shots/heroselect_grid.jpg" alt="Hero Select Plus: classes, search and filters on the Deadlock hero select screen">
 
 - 🏷️ **Names and classes** on every hero card, colour coded: Marksman, Assassin, Mystic, Brawler.
 - 🔎 **Search** by name, class, tag, weapon type or difficulty. Several words narrow it down, for
@@ -118,7 +118,7 @@ Hero Select Plus makes the hero select screen easier to read, especially for new
 <summary><b>📸 Close-up</b></summary>
 
 <br>
-<img src="docs/img/shots/heroselect_2.jpg" alt="Hero Select Plus close-up of hero cards">
+<img src="docs/img/shots/heroselect_closeup.jpg" alt="Hero Select Plus close-up of hero cards">
 
 </details>
 

@@ -34,12 +34,14 @@ MODS = [
                 "Hide, lock and reset elements; save and share layouts",
                 "Fixes the health bar disappearing at 4:3"],
      "dist": os.path.join(HOME, "deadlock-hudfit/dist/release"), "prefix": "hud_fit_v",
-     "shots": [("20261003085728_1.jpg", "Before: the stock HUD at 4:3 stretched"),
+     "shots": [("20261003084800_1.jpg", "Show all outlines: every element you can move and resize"),
+               ("20261003085728_1.jpg", "Before: the stock HUD at 4:3 stretched"),
                ("20261003085833_1.jpg", "After: de-stretched, resized and a filter, with HUD Fit"),
                ("20261003082723_1.jpg", "The editor opens over the live HUD (Esc, then HUD Fit)"),
-               ("20261003085741_1.jpg", "Layers: show, hide, lock or reset every element"),
-               ("20261003084800_1.jpg", "Show all outlines: every element you can move and resize")],
-     "compare": (1, 2)},
+               ("20261003085741_1.jpg", "Layers: show, hide, lock or reset every element")],
+     "compare": ("20261003085728_1.jpg", "20261003085833_1.jpg"),
+     # these were taken at 4:3 stretched: show them 16:9 wide, as they look on the monitor
+     "stretch43": True},
     {"key": "aspect43", "folder": "4-3 Video", "name": "4:3 Video", "accent": "#b48cff",
      "tagline": "Adds a 4x3 aspect ratio button to the video settings, without hiding new settings.",
      "points": ["4x3 next to 16:9, 16:10 and 21:9 in Settings \u2192 Video",
@@ -82,9 +84,16 @@ def details_html(folder):
     return body
 
 
-def jpg(src, dst, width):
-    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", src, "-vf", "scale='min(%d,iw)':-2" % width, "-q:v", "3", dst],
-                   check=True)
+def jpg(src, dst, width, stretch=False):
+    """Resized copy. stretch: a 4:3 capture is shown 16:9 wide, the way a 4:3 stretched player sees it."""
+    vf = "scale=%d:%d" % (width, width * 9 // 16) if stretch else "scale='min(%d,iw)':-2" % width
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", src, "-vf", vf, "-q:v", "3", dst], check=True)
+
+
+def is_43(path):
+    out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=width,height", "-of", "csv=p=0", path],
+                         capture_output=True, text=True, check=True).stdout.strip().split(",")
+    return int(out[0]) / int(out[1]) < 1.5
 
 
 PAGE = """<!doctype html>
@@ -136,10 +145,26 @@ nav ul a:hover {{ color:var(--text); background:var(--panel2) }}
 
 /* mods */
 .mod {{ display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:center; padding:48px 0; border-top:1px solid var(--line) }}
-.mod:nth-of-type(even) .media {{ order:2 }}
+.mod.flip .media {{ order:2 }}
 .media {{ position:relative; border-radius:16px; overflow:hidden; border:1px solid var(--line); box-shadow:0 20px 60px #0008 }}
 .media img {{ width:100%; aspect-ratio:16/9; object-fit:cover; display:block; background:#000 }}
 .media button {{ position:absolute; inset:0; border:0; background:none; cursor:zoom-in }}
+/* screenshot as the mod's picture: dimmed with the name over it, full colour on hover */
+.shotmedia img {{ transition:filter .35s, transform .5s }}
+.shotmedia .over {{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:20px 22px;
+                    background:linear-gradient(to top, #0e0c0ae6 0%, #0e0c0a66 45%, transparent 75%); transition:opacity .35s; pointer-events:none }}
+.shotmedia .over b {{ font-family:var(--head); font-size:34px; line-height:1; color:var(--accent); text-shadow:0 2px 12px #000 }}
+.shotmedia .over span {{ font-size:13px; color:var(--text); opacity:.8; margin-top:6px }}
+@media (hover:hover) {{
+  .shotmedia img {{ filter:grayscale(.7) brightness(.6) sepia(.25) }}
+  .shotmedia:hover img {{ filter:none; transform:scale(1.03) }}
+  .shotmedia:hover .over {{ opacity:0 }}
+}}
+.strip {{ grid-column:1 / -1; order:3; display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:10px; margin-top:4px }}
+.strip button {{ padding:0; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#000; cursor:zoom-in }}
+.strip img {{ width:100%; aspect-ratio:16/9; object-fit:cover; display:block; transition:transform .3s, filter .3s }}
+@media (hover:hover) {{ .strip img {{ filter:saturate(.6) brightness(.8) }} .strip button:hover img {{ filter:none; transform:scale(1.05) }} }}
+.strip button:hover {{ border-color:var(--accent) }}
 .info h2 {{ font-family:var(--head); font-size:38px; margin:0; line-height:1.1 }}
 .tag {{ color:var(--accent); font-weight:600; margin:6px 0 14px }}
 .info ul {{ list-style:none; padding:0; margin:0 0 22px }}
@@ -154,14 +179,14 @@ nav ul a:hover {{ color:var(--text); background:var(--panel2) }}
 .ghost {{ background:none; color:var(--text); border:1px solid var(--line) }}
 .ghost:hover {{ border-color:var(--accent); filter:none }}
 .meta {{ font-size:13px; color:var(--muted); width:100% }}
-@media (max-width:860px) {{ .mod {{ grid-template-columns:1fr; gap:22px; padding:36px 0 }} .mod:nth-of-type(even) .media {{ order:0 }} }}
+@media (max-width:860px) {{ .mod {{ grid-template-columns:1fr; gap:22px; padding:36px 0 }} .mod.flip .media {{ order:0 }} }}
 
 /* before / after slider */
 .compare {{ padding:0 0 48px }}
 .compare h3 {{ font-family:var(--head); font-size:26px; margin:0 0 4px }}
 .compare p {{ color:var(--muted); margin:0 0 16px }}
 .ba {{ position:relative; border-radius:16px; overflow:hidden; border:1px solid var(--line); box-shadow:0 20px 60px #0008;
-       aspect-ratio:4/3; max-width:900px; margin:0 auto; user-select:none; --pos:50% }}
+       aspect-ratio:16/9; max-width:1080px; margin:0 auto; user-select:none; --pos:50% }}
 .ba img {{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block }}
 .ba .after {{ clip-path:inset(0 0 0 var(--pos)) }}
 .ba .bar {{ position:absolute; top:0; bottom:0; left:var(--pos); width:3px; margin-left:-1.5px; background:var(--gold); pointer-events:none }}
@@ -283,7 +308,12 @@ document.querySelectorAll(".ba").forEach(function (b) {{
   r.addEventListener("input", function () {{ b.style.setProperty("--pos", r.value + "%"); }});
 }});
 document.querySelectorAll("[data-open]").forEach(function (b) {{
-  b.addEventListener("click", function () {{ document.getElementById(b.dataset.open).showModal(); }});
+  b.addEventListener("click", function () {{
+    var d = document.getElementById(b.dataset.open);
+    d.showModal();
+    var t = d.querySelectorAll(".thumbs button")[b.dataset.shot || 0];
+    if (t) t.click();
+  }});
 }});
 document.querySelectorAll("dialog").forEach(function (d) {{
   d.addEventListener("click", function (e) {{ if (e.target === d) d.close(); }});   // click outside closes
@@ -306,8 +336,8 @@ document.querySelectorAll("dialog").forEach(function (d) {{
 DOWNLOAD_ICON = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" '
                  'stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>')
 
-CARD = """<section class="mod" id="{key}" style="--accent:{accent}">
-  <div class="media"><img src="img/{key}.jpg" alt="{name}" loading="lazy"><button data-open="dlg-{key}" aria-label="{name} details"></button></div>
+CARD = """<section class="mod{flip}" id="{key}" style="--accent:{accent}">
+  <div class="media{media_cls}"><img src="{media}" alt="{name}" loading="lazy">{media_over}<button data-open="dlg-{key}" aria-label="{name} details"></button></div>
   <div class="info">
     <h2>{name}</h2>
     <div class="tag">{tagline}</div>
@@ -318,6 +348,7 @@ CARD = """<section class="mod" id="{key}" style="--accent:{accent}">
       <div class="meta">{size} KB zip</div>
     </div>
   </div>
+  {strip}
 </section>
 <dialog id="dlg-{key}" style="--accent:{accent}" aria-label="{name}">
   <div class="dlg-head"><h2>{name}</h2><a class="btn" href="downloads/{zip}" download>Download {version}</a>
@@ -328,7 +359,7 @@ CARD = """<section class="mod" id="{key}" style="--accent:{accent}">
 
 COMPARE = """<section class="compare" style="--accent:{accent}">
   <h3>Before and after</h3>
-  <p>The same spot at 4:3 stretched: the stock HUD, then de-stretched and resized with HUD Fit. Drag to compare.</p>
+  <p>4:3 stretched on a 16:9 monitor, the same spot: the stock HUD, then de-stretched and resized with HUD Fit. Drag to compare.</p>
   <div class="ba">
     <img src="{before}" alt="Deadlock HUD stretched at 4:3, without HUD Fit">
     <img class="after" src="{after}" alt="Deadlock HUD de-stretched and resized with HUD Fit">
@@ -370,22 +401,47 @@ def faq_ld():
     return json.dumps(data).replace("</", "<\\/")
 
 
-def gallery_html(m):
-    """Screenshots: web-size copy + full-size copy + thumbnail per shot, first one shown large."""
-    shots = m.get("shots") or []
-    if not shots:
-        return ""
+def shot_base(m, src):
+    """Output name of a screenshot: mod key + source file name, so reordering never mixes files up."""
+    stem = re.sub(r"[^a-z0-9]+", "_", os.path.splitext(os.path.basename(src))[0].lower()).strip("_")
+    stem = re.sub(r"^%s_" % re.escape(m["key"]), "", stem)
+    return "%s_%s" % (m["key"], stem)
+
+
+def shot_items(m):
+    """(web, big, thumb, caption) per screenshot; makes the resized copies once."""
     d = os.path.join(DOCS, "img", "shots")
     os.makedirs(d, exist_ok=True)
     items = []
-    for i, (src, caption) in enumerate(shots, 1):
-        base = "%s_%d" % (m["key"], i)
+    for src, caption in m.get("shots") or []:
+        base = shot_base(m, src)
         path = os.path.join(STEAM_SHOTS, src)
+        stretch = None
         for suffix, width in (("", 1280), ("_big", 2560), ("_t", 240)):
             out = os.path.join(d, base + suffix + ".jpg")
             if not os.path.exists(out):
-                jpg(path, out, width)
+                if stretch is None:
+                    stretch = bool(m.get("stretch43")) and is_43(path)
+                jpg(path, out, min(width, 1920) if stretch else width, stretch)
         items.append(("img/shots/%s.jpg" % base, "img/shots/%s_big.jpg" % base, "img/shots/%s_t.jpg" % base, caption))
+    return items
+
+
+def strip_html(m):
+    """Screenshot row under a mod; each opens the pop-up at that screenshot."""
+    items = shot_items(m)
+    if not items:
+        return ""
+    return '<div class="strip">%s</div>' % "".join(
+        '<button data-open="dlg-%s" data-shot="%d" title="%s"><img src="%s" alt="%s" loading="lazy"></button>'
+        % (m["key"], i, html.escape(c), t, html.escape(c)) for i, (f, b, t, c) in enumerate(items))
+
+
+def gallery_html(m):
+    """Screenshots in the pop-up: first one shown large, thumbnails to switch."""
+    items = shot_items(m)
+    if not items:
+        return ""
     full, big, _, cap = items[0]
     thumbs = "".join(
         '<button data-full="%s" data-big="%s" data-caption="%s" aria-current="%s"><img src="%s" alt="" loading="lazy"></button>'
@@ -425,7 +481,7 @@ def main():
     if os.path.exists(old_avatar):
         os.remove(old_avatar)
     cards, keep, versions = [], set(), {}
-    for m in MODS:
+    for n, m in enumerate(MODS):
         version, zipname = latest_zip(m)
         versions[m["key"]] = (version, zipname)
         shutil.copyfile(os.path.join(m["dist"], zipname), os.path.join(DOCS, "downloads", zipname))
@@ -433,13 +489,18 @@ def main():
         jpg(os.path.join(BRANDING, "out", m["key"] + ".png"), os.path.join(DOCS, "img", m["key"] + ".jpg"), 960)
         size = os.path.getsize(os.path.join(DOCS, "downloads", zipname)) // 1024 + 1
         points = "".join("<li>%s</li>" % html.escape(p) for p in m["points"])
-        cards.append(CARD.format(accent=m["accent"], key=m["key"], name=html.escape(m["name"]),
+        cards.append(CARD.format(flip=" flip" if n % 2 else "", accent=m["accent"], key=m["key"], name=html.escape(m["name"]),
                                  tagline=html.escape(m["tagline"]), version=version, size=size, points=points,
                                  zip=zipname, details=details_html(m["folder"]), gallery=gallery_html(m),
                                  more="Details &amp; screenshots" if m.get("shots") else "Details",
+                                 media=shot_items(m)[0][0] if m.get("shots") else "img/%s.jpg" % m["key"],
+                                 media_cls=" shotmedia" if m.get("shots") else "",
+                                 media_over=('<div class="over"><b>%s</b><span>%d screenshots</span></div>'
+                                             % (html.escape(m["name"]), len(m["shots"]))) if m.get("shots") else "",
+                                 strip=strip_html(m),
                                  extra=COMPARE.format(accent=m["accent"],
-                                                      before="img/shots/%s_%d.jpg" % (m["key"], m["compare"][0]),
-                                                      after="img/shots/%s_%d.jpg" % (m["key"], m["compare"][1]))
+                                                      before="img/shots/%s.jpg" % shot_base(m, m["compare"][0]),
+                                                      after="img/shots/%s.jpg" % shot_base(m, m["compare"][1]))
                                  if m.get("compare") else ""))
         print("%-17s v%s  %s" % (m["name"], version, zipname))
     # old versions are dropped from the site (the git history keeps them)
@@ -453,6 +514,11 @@ def main():
                             faq=faq_html(), faq_ld=faq_ld()))
     open(os.path.join(DOCS, ".nojekyll"), "w").close()
     update_readme(versions)
+    used = {os.path.basename(p) for m in MODS for it in shot_items(m) for p in it[:3]}
+    sd = os.path.join(DOCS, "img", "shots")
+    for f in os.listdir(sd):
+        if f not in used:
+            os.remove(os.path.join(sd, f))
     print("wrote", os.path.join(DOCS, "index.html"))
 
 
