@@ -19,6 +19,7 @@ HOME = os.path.expanduser("~")
 BRANDING = os.path.join(HOME, "deadlock-branding")
 DOCS = os.path.join(HERE, "docs")
 REPO = "https://github.com/GREEB/mods"
+STEAM_SHOTS = "/mnt/c/Program Files (x86)/Steam/userdata/43593840/760/remote/1422450/screenshots"
 
 sys.path.insert(0, BRANDING)
 import descriptions  # noqa: E402  (per-mod GameBanana texts, reused here)
@@ -28,7 +29,12 @@ MODS = [
     {"key": "hudfit", "folder": "HUD Fit", "name": "HUD Fit", "accent": "#ffc83c",
      "tagline": "Move, resize and de-stretch every HUD element, live in game.",
      "dist": os.path.join(HOME, "deadlock-hudfit/dist/release"), "prefix": "hud_fit_v",
-     "source": "https://github.com/GREEB/deadlock-hudfit"},
+     "source": "https://github.com/GREEB/deadlock-hudfit",
+     "shots": [("20261003085728_1.jpg", "Before: the stock HUD at 4:3 stretched"),
+               ("20261003085833_1.jpg", "After: de-stretched, resized and a filter, with HUD Fit"),
+               ("20261003082723_1.jpg", "The editor opens over the live HUD (Esc, then HUD Fit)"),
+               ("20261003085741_1.jpg", "Layers: show, hide, lock or reset every element"),
+               ("20261003084800_1.jpg", "Show all outlines: every element you can move and resize")]},
     {"key": "aspect43", "folder": "4-3 Video", "name": "4:3 Video", "accent": "#b48cff",
      "tagline": "Adds a 4x3 aspect ratio button to the video settings, without hiding new settings.",
      "dist": os.path.join(HOME, "deadlock-4x3/dist/release"), "prefix": "aspect_4x3_v"},
@@ -96,13 +102,30 @@ header p {{ margin:0; color:var(--muted) }}
 .btn {{ display:block; text-align:center; padding:11px 14px; border-radius:9px; font-weight:700; text-decoration:none;
        color:#14110e; background:var(--accent); margin-top:auto }}
 .btn:hover {{ filter:brightness(1.1) }}
-details {{ border-top:1px solid var(--line); padding-top:8px }}
-summary {{ cursor:pointer; color:var(--gold) }}
-details .desc {{ font-size:14px; color:#d8ccb6 }}
-details .desc h2 {{ font-size:17px; margin:14px 0 4px; color:var(--text) }}
-details .desc h3 {{ font-size:15px; margin:12px 0 4px; color:var(--text) }}
-details .desc ul {{ padding-left:20px; margin:4px 0 }}
-details .desc hr {{ border:0; border-top:1px solid var(--line) }}
+.more {{ background:none; border:1px solid var(--line); color:var(--gold); border-radius:9px; padding:9px 14px;
+        font:inherit; cursor:pointer }}
+.more:hover {{ border-color:var(--gold) }}
+dialog {{ width:min(1000px, calc(100vw - 32px)); max-height:calc(100vh - 32px); padding:0; border:1px solid var(--line);
+          border-radius:14px; background:var(--panel); color:var(--text) }}
+dialog::backdrop {{ background:#000c }}
+.dlg-head {{ position:sticky; top:0; z-index:1; display:flex; align-items:center; gap:12px; padding:12px 16px;
+             background:var(--panel); border-bottom:1px solid var(--line) }}
+.dlg-head h2 {{ margin:0; font-size:22px; flex:1 }}
+.dlg-head .btn {{ margin:0; padding:8px 14px }}
+.close {{ background:none; border:0; color:var(--muted); font-size:28px; line-height:1; cursor:pointer; padding:0 4px }}
+.dlg-body {{ padding:16px }}
+.shot {{ margin:0 }}
+.shot img {{ width:100%; max-height:62vh; object-fit:contain; border-radius:10px; display:block; background:#000; cursor:zoom-in }}
+.shot figcaption {{ color:var(--muted); font-size:14px; margin:6px 0 10px }}
+.thumbs {{ display:flex; gap:8px; overflow-x:auto; padding-bottom:6px }}
+.thumbs button {{ flex:0 0 auto; padding:0; border:2px solid transparent; border-radius:7px; background:none; cursor:pointer }}
+.thumbs button[aria-current="true"] {{ border-color:var(--accent) }}
+.thumbs img {{ width:120px; height:72px; object-fit:cover; border-radius:5px; display:block }}
+.desc {{ font-size:15px; color:#d8ccb6; margin-top:8px }}
+.desc h2 {{ font-size:19px; margin:18px 0 4px; color:var(--text) }}
+.desc h3 {{ font-size:16px; margin:14px 0 4px; color:var(--text) }}
+.desc ul {{ padding-left:20px; margin:4px 0 }}
+.desc hr {{ border:0; border-top:1px solid var(--line) }}
 .GreenColor {{ color:#8fd46a }} .RedColor {{ color:#ff7a68 }} .OrangeColor {{ color:#ffad5a }}
 .install {{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:6px 22px 14px; margin-bottom:28px }}
 .install h2 {{ font-size:22px; margin:14px 0 6px }}
@@ -149,6 +172,24 @@ footer {{ text-align:center; color:var(--muted); font-size:13px; padding:10px 0 
 
 <footer>Questions or bugs: <a href="{repo}/issues">open an issue on GitHub</a> &middot; Not affiliated with Valve.</footer>
 </div>
+<script>
+document.querySelectorAll("[data-open]").forEach(function (b) {{
+  b.addEventListener("click", function () {{ document.getElementById(b.dataset.open).showModal(); }});
+}});
+document.querySelectorAll("dialog").forEach(function (d) {{
+  d.addEventListener("click", function (e) {{ if (e.target === d) d.close(); }});   // click outside closes
+  d.querySelector(".close").addEventListener("click", function () {{ d.close(); }});
+  d.querySelectorAll(".thumbs button").forEach(function (t) {{
+    t.addEventListener("click", function () {{
+      var fig = d.querySelector(".shot");
+      fig.querySelector("img").src = t.dataset.full;
+      fig.querySelector("a").href = t.dataset.big;
+      fig.querySelector("figcaption").textContent = t.dataset.caption;
+      d.querySelectorAll(".thumbs button").forEach(function (o) {{ o.setAttribute("aria-current", o === t); }});
+    }});
+  }});
+}});
+</script>
 </body>
 </html>
 """
@@ -160,9 +201,38 @@ CARD = """<article class="card" style="--accent:{accent}">
     <p>{tagline}</p>
     <div class="meta">Version {version} &middot; {size} KB{source}</div>
     <a class="btn" href="downloads/{zip}" download>Download {name} {version}</a>
-    <details><summary>Details</summary><div class="desc">{details}</div></details>
+    <button class="more" data-open="dlg-{key}">{more}</button>
   </div>
-</article>"""
+</article>
+<dialog id="dlg-{key}" style="--accent:{accent}" aria-label="{name}">
+  <div class="dlg-head"><h2>{name}</h2><a class="btn" href="downloads/{zip}" download>Download {version}</a>
+    <button class="close" aria-label="Close">&times;</button></div>
+  <div class="dlg-body">{gallery}<div class="desc">{details}</div></div>
+</dialog>"""
+
+
+def gallery_html(m):
+    """Screenshots: web-size copy + full-size copy + thumbnail per shot, first one shown large."""
+    shots = m.get("shots") or []
+    if not shots:
+        return ""
+    d = os.path.join(DOCS, "img", "shots")
+    os.makedirs(d, exist_ok=True)
+    items = []
+    for i, (src, caption) in enumerate(shots, 1):
+        base = "%s_%d" % (m["key"], i)
+        path = os.path.join(STEAM_SHOTS, src)
+        for suffix, width in (("", 1280), ("_big", 2560), ("_t", 240)):
+            out = os.path.join(d, base + suffix + ".jpg")
+            if not os.path.exists(out):
+                jpg(path, out, width)
+        items.append(("img/shots/%s.jpg" % base, "img/shots/%s_big.jpg" % base, "img/shots/%s_t.jpg" % base, caption))
+    full, big, _, cap = items[0]
+    thumbs = "".join(
+        '<button data-full="%s" data-big="%s" data-caption="%s" aria-current="%s"><img src="%s" alt="" loading="lazy"></button>'
+        % (f, b, html.escape(c), "true" if i == 0 else "false", t) for i, (f, b, t, c) in enumerate(items))
+    return ('<figure class="shot"><a href="%s" target="_blank"><img src="%s" alt=""></a><figcaption>%s</figcaption></figure>'
+            '<div class="thumbs">%s</div>' % (big, full, html.escape(cap), thumbs))
 
 
 def main():
@@ -179,7 +249,8 @@ def main():
         source = ' &middot; <a href="%s">source</a>' % m["source"] if m.get("source") else ""
         cards.append(CARD.format(accent=m["accent"], key=m["key"], name=html.escape(m["name"]),
                                  tagline=html.escape(m["tagline"]), version=version, size=size, source=source,
-                                 zip=zipname, details=details_html(m["folder"])))
+                                 zip=zipname, details=details_html(m["folder"]), gallery=gallery_html(m),
+                                 more="Details &amp; screenshots" if m.get("shots") else "Details"))
         print("%-17s v%s  %s" % (m["name"], version, zipname))
     # old versions are dropped from the site (the git history keeps them)
     for f in os.listdir(os.path.join(DOCS, "downloads")):

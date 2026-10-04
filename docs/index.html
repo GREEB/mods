@@ -28,13 +28,30 @@ header p { margin:0; color:var(--muted) }
 .btn { display:block; text-align:center; padding:11px 14px; border-radius:9px; font-weight:700; text-decoration:none;
        color:#14110e; background:var(--accent); margin-top:auto }
 .btn:hover { filter:brightness(1.1) }
-details { border-top:1px solid var(--line); padding-top:8px }
-summary { cursor:pointer; color:var(--gold) }
-details .desc { font-size:14px; color:#d8ccb6 }
-details .desc h2 { font-size:17px; margin:14px 0 4px; color:var(--text) }
-details .desc h3 { font-size:15px; margin:12px 0 4px; color:var(--text) }
-details .desc ul { padding-left:20px; margin:4px 0 }
-details .desc hr { border:0; border-top:1px solid var(--line) }
+.more { background:none; border:1px solid var(--line); color:var(--gold); border-radius:9px; padding:9px 14px;
+        font:inherit; cursor:pointer }
+.more:hover { border-color:var(--gold) }
+dialog { width:min(1000px, calc(100vw - 32px)); max-height:calc(100vh - 32px); padding:0; border:1px solid var(--line);
+          border-radius:14px; background:var(--panel); color:var(--text) }
+dialog::backdrop { background:#000c }
+.dlg-head { position:sticky; top:0; z-index:1; display:flex; align-items:center; gap:12px; padding:12px 16px;
+             background:var(--panel); border-bottom:1px solid var(--line) }
+.dlg-head h2 { margin:0; font-size:22px; flex:1 }
+.dlg-head .btn { margin:0; padding:8px 14px }
+.close { background:none; border:0; color:var(--muted); font-size:28px; line-height:1; cursor:pointer; padding:0 4px }
+.dlg-body { padding:16px }
+.shot { margin:0 }
+.shot img { width:100%; max-height:62vh; object-fit:contain; border-radius:10px; display:block; background:#000; cursor:zoom-in }
+.shot figcaption { color:var(--muted); font-size:14px; margin:6px 0 10px }
+.thumbs { display:flex; gap:8px; overflow-x:auto; padding-bottom:6px }
+.thumbs button { flex:0 0 auto; padding:0; border:2px solid transparent; border-radius:7px; background:none; cursor:pointer }
+.thumbs button[aria-current="true"] { border-color:var(--accent) }
+.thumbs img { width:120px; height:72px; object-fit:cover; border-radius:5px; display:block }
+.desc { font-size:15px; color:#d8ccb6; margin-top:8px }
+.desc h2 { font-size:19px; margin:18px 0 4px; color:var(--text) }
+.desc h3 { font-size:16px; margin:14px 0 4px; color:var(--text) }
+.desc ul { padding-left:20px; margin:4px 0 }
+.desc hr { border:0; border-top:1px solid var(--line) }
 .GreenColor { color:#8fd46a } .RedColor { color:#ff7a68 } .OrangeColor { color:#ffad5a }
 .install { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:6px 22px 14px; margin-bottom:28px }
 .install h2 { font-size:22px; margin:14px 0 6px }
@@ -59,9 +76,14 @@ footer { text-align:center; color:var(--muted); font-size:13px; padding:10px 0 4
     <p>Move, resize and de-stretch every HUD element, live in game.</p>
     <div class="meta">Version 1.1 &middot; 40 KB &middot; <a href="https://github.com/GREEB/deadlock-hudfit">source</a></div>
     <a class="btn" href="downloads/hud_fit_v1.1.zip" download>Download HUD Fit 1.1</a>
-    <details><summary>Details</summary><div class="desc"><h2>Rearrange your HUD, live, in game</h2><b>HUD Fit</b> is an in-game editor for the Deadlock HUD: click any element, drag it, resize it, hide it. Built for <b>4:3 stretched</b> players (de-stretch the HUD so it stops looking wide), useful on any resolution.<br><br><b>Open it:</b> Esc → <b>HUD Fit</b> (under Settings). Best in <span class="OrangeColor">Explore NYC</span> or a sandbox / Hero Testing match — the hideout hides most of the HUD.<h2>Features</h2><ul><li><b>Click, drag, resize</b> any of 22 HUD elements on the real HUD — health bar, abilities, items &amp; souls, weapon/spirit/vitality, minimap, top bar, crosshair &amp; ammo, kill feed, chat, prompts, buffs, damage meter and more</li><li><b>Snapping</b> to screen edges, the centre and other elements; <b>W A S D</b> nudge (Shift = 10 px), <b>+ / −</b> size</li><li><b>Center</b> buttons: put the crosshair or any element exactly in the middle of the screen</li><li><b>Layers panel</b>: show/hide each element in game, lock it, reset it with one click</li><li><b>4:3 stretch fix</b>: de-stretch chosen elements or everything (4:3, 5:4, 16:10 presets)</li><li><b>Scale all items</b>: make the whole HUD bigger or smaller — every element stays at its screen edge</li><li>Fixes the <span class="GreenColor">health bar disappearing at 4:3</span> (the stock layout only fits 16:9 and wider)</li><li><b>Test tab</b>: one-click sandbox situations (damage, low health, death/respawn timer, level up, souls, buffs, enemy bot, trooper wave, DPS meter) so you see the real UI while arranging it</li><li><b>Layouts</b>: Default, Clean and up to <b>20 named layouts</b> — <span class="GreenColor">export / import a layout code</span> to share it</li><li><b>Filters</b> with a strength slider: Monochrome, Sepia, Neon, Ice, Ghost, Focus, Muted</li><li>Everything is <b>saved on your PC</b> and comes back after a restart</li></ul><h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li><li>Made to be used together with <b>4:3 Video</b> (adds a 4x3 aspect ratio option to the video settings)</li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> Hero Select Plus and 4:3 Video</li><li><span class="RedColor">Conflicts with</span> other mods that replace <i>base_hud</i> or <i>hud_escape_menu</i>, and with full HUD overhauls</li><li>After a big game update, if the HUD looks wrong, <span class="RedColor">disable the mod</span> until an updated build is posted</li></ul><h3>Saving &amp; privacy</h3>Layouts are kept in your PC's game browser storage through a tiny page with <b>no network access</b> (nothing is uploaded): <a href="https://greeb.github.io/hudfit-storage/">hudfit-storage</a>.<h3>Open source</h3>Source and community filters: <a href="https://github.com/GREEB/deadlock-hudfit">GitHub</a> — new filters welcome as pull requests.</div></details>
+    <button class="more" data-open="dlg-hudfit">Details &amp; screenshots</button>
   </div>
 </article>
+<dialog id="dlg-hudfit" style="--accent:#ffc83c" aria-label="HUD Fit">
+  <div class="dlg-head"><h2>HUD Fit</h2><a class="btn" href="downloads/hud_fit_v1.1.zip" download>Download 1.1</a>
+    <button class="close" aria-label="Close">&times;</button></div>
+  <div class="dlg-body"><figure class="shot"><a href="img/shots/hudfit_1_big.jpg" target="_blank"><img src="img/shots/hudfit_1.jpg" alt=""></a><figcaption>Before: the stock HUD at 4:3 stretched</figcaption></figure><div class="thumbs"><button data-full="img/shots/hudfit_1.jpg" data-big="img/shots/hudfit_1_big.jpg" data-caption="Before: the stock HUD at 4:3 stretched" aria-current="true"><img src="img/shots/hudfit_1_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_2.jpg" data-big="img/shots/hudfit_2_big.jpg" data-caption="After: de-stretched, resized and a filter, with HUD Fit" aria-current="false"><img src="img/shots/hudfit_2_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_3.jpg" data-big="img/shots/hudfit_3_big.jpg" data-caption="The editor opens over the live HUD (Esc, then HUD Fit)" aria-current="false"><img src="img/shots/hudfit_3_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_4.jpg" data-big="img/shots/hudfit_4_big.jpg" data-caption="Layers: show, hide, lock or reset every element" aria-current="false"><img src="img/shots/hudfit_4_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_5.jpg" data-big="img/shots/hudfit_5_big.jpg" data-caption="Show all outlines: every element you can move and resize" aria-current="false"><img src="img/shots/hudfit_5_t.jpg" alt="" loading="lazy"></button></div><div class="desc"><h2>Rearrange your HUD, live, in game</h2><b>HUD Fit</b> is an in-game editor for the Deadlock HUD: click any element, drag it, resize it, hide it. Built for <b>4:3 stretched</b> players (de-stretch the HUD so it stops looking wide), useful on any resolution.<br><br><b>Open it:</b> Esc → <b>HUD Fit</b> (under Settings). Best in <span class="OrangeColor">Explore NYC</span> or a sandbox / Hero Testing match — the hideout hides most of the HUD.<h2>Features</h2><ul><li><b>Click, drag, resize</b> any of 22 HUD elements on the real HUD — health bar, abilities, items &amp; souls, weapon/spirit/vitality, minimap, top bar, crosshair &amp; ammo, kill feed, chat, prompts, buffs, damage meter and more</li><li><b>Snapping</b> to screen edges, the centre and other elements; <b>W A S D</b> nudge (Shift = 10 px), <b>+ / −</b> size</li><li><b>Center</b> buttons: put the crosshair or any element exactly in the middle of the screen</li><li><b>Layers panel</b>: show/hide each element in game, lock it, reset it with one click</li><li><b>4:3 stretch fix</b>: de-stretch chosen elements or everything (4:3, 5:4, 16:10 presets)</li><li><b>Scale all items</b>: make the whole HUD bigger or smaller — every element stays at its screen edge</li><li>Fixes the <span class="GreenColor">health bar disappearing at 4:3</span> (the stock layout only fits 16:9 and wider)</li><li><b>Test tab</b>: one-click sandbox situations (damage, low health, death/respawn timer, level up, souls, buffs, enemy bot, trooper wave, DPS meter) so you see the real UI while arranging it</li><li><b>Layouts</b>: Default, Clean and up to <b>20 named layouts</b> — <span class="GreenColor">export / import a layout code</span> to share it</li><li><b>Filters</b> with a strength slider: Monochrome, Sepia, Neon, Ice, Ghost, Focus, Muted</li><li>Everything is <b>saved on your PC</b> and comes back after a restart</li></ul><h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li><li>Made to be used together with <b>4:3 Video</b> (adds a 4x3 aspect ratio option to the video settings)</li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> Hero Select Plus and 4:3 Video</li><li><span class="RedColor">Conflicts with</span> other mods that replace <i>base_hud</i> or <i>hud_escape_menu</i>, and with full HUD overhauls</li><li>After a big game update, if the HUD looks wrong, <span class="RedColor">disable the mod</span> until an updated build is posted</li></ul><h3>Saving &amp; privacy</h3>Layouts are kept in your PC's game browser storage through a tiny page with <b>no network access</b> (nothing is uploaded): <a href="https://greeb.github.io/hudfit-storage/">hudfit-storage</a>.<h3>Open source</h3>Source and community filters: <a href="https://github.com/GREEB/deadlock-hudfit">GitHub</a> — new filters welcome as pull requests.</div></div>
+</dialog>
 <article class="card" style="--accent:#b48cff">
   <img src="img/aspect43.jpg" alt="4:3 Video" loading="lazy">
   <div class="body">
@@ -69,9 +91,14 @@ footer { text-align:center; color:var(--muted); font-size:13px; padding:10px 0 4
     <p>Adds a 4x3 aspect ratio button to the video settings, without hiding new settings.</p>
     <div class="meta">Version 2.0 &middot; 4 KB</div>
     <a class="btn" href="downloads/aspect_4x3_v2.0.zip" download>Download 4:3 Video 2.0</a>
-    <details><summary>Details</summary><div class="desc"><h2>A 4x3 button in the video settings</h2>Adds a <b>4x3</b> choice to <b>Settings → Video → Aspect Ratio</b>, next to 16:9, 16:10 and 21:9. Pick it and the resolution list shows the 4:3 modes your graphics driver offers.<h2>Why this one</h2><ul><li>Older 4:3 mods ship a whole copy of the settings screen — that <span class="RedColor">hides every newer setting</span> (Down Dash bind, shop binds, subtitle options…) and gets worse with every patch</li><li>4:3 Video <span class="GreenColor">never replaces the settings screen</span>: the button is added to the live screen while it is open, so settings from future game updates always show up</li><li>Remembers your choice: 4x3 stays selected when you reopen the settings</li></ul><h2>Higher 4:3 resolutions</h2>Want <b>1920×1440</b> or similar? The game lists what your graphics driver offers — add them as custom resolutions first (AMD Adrenalin, NVIDIA Control Panel or CRU).<h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li><li><span class="RedColor">Turn off older 4:3 settings mods</span> (they replace the settings screen)</li><li>Made to be used together with <b>HUD Fit</b> — de-stretch, move and resize the HUD for 4:3 stretched</li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> HUD Fit and Hero Select Plus</li><li>Changes only one tiny HUD file (subtitles layout); the settings screen is never touched</li></ul></div></details>
+    <button class="more" data-open="dlg-aspect43">Details</button>
   </div>
 </article>
+<dialog id="dlg-aspect43" style="--accent:#b48cff" aria-label="4:3 Video">
+  <div class="dlg-head"><h2>4:3 Video</h2><a class="btn" href="downloads/aspect_4x3_v2.0.zip" download>Download 2.0</a>
+    <button class="close" aria-label="Close">&times;</button></div>
+  <div class="dlg-body"><div class="desc"><h2>A 4x3 button in the video settings</h2>Adds a <b>4x3</b> choice to <b>Settings → Video → Aspect Ratio</b>, next to 16:9, 16:10 and 21:9. Pick it and the resolution list shows the 4:3 modes your graphics driver offers.<h2>Why this one</h2><ul><li>Older 4:3 mods ship a whole copy of the settings screen — that <span class="RedColor">hides every newer setting</span> (Down Dash bind, shop binds, subtitle options…) and gets worse with every patch</li><li>4:3 Video <span class="GreenColor">never replaces the settings screen</span>: the button is added to the live screen while it is open, so settings from future game updates always show up</li><li>Remembers your choice: 4x3 stays selected when you reopen the settings</li></ul><h2>Higher 4:3 resolutions</h2>Want <b>1920×1440</b> or similar? The game lists what your graphics driver offers — add them as custom resolutions first (AMD Adrenalin, NVIDIA Control Panel or CRU).<h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li><li><span class="RedColor">Turn off older 4:3 settings mods</span> (they replace the settings screen)</li><li>Made to be used together with <b>HUD Fit</b> — de-stretch, move and resize the HUD for 4:3 stretched</li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> HUD Fit and Hero Select Plus</li><li>Changes only one tiny HUD file (subtitles layout); the settings screen is never touched</li></ul></div></div>
+</dialog>
 <article class="card" style="--accent:#4fd1c5">
   <img src="img/heroselect.jpg" alt="Hero Select Plus" loading="lazy">
   <div class="body">
@@ -79,9 +106,14 @@ footer { text-align:center; color:var(--muted); font-size:13px; padding:10px 0 4
     <p>Hero names, classes, search and filters on the hero select screen.</p>
     <div class="meta">Version 1.0 &middot; 19 KB</div>
     <a class="btn" href="downloads/hero_select_plus_v1.0.zip" download>Download Hero Select Plus 1.0</a>
-    <details><summary>Details</summary><div class="desc"><h2>Learn the heroes faster</h2>Hero Select Plus makes the hero select screen easier to read, especially if you are new to Deadlock.<h2>Features</h2><ul><li><b>Hero names</b> always visible on every card</li><li><b>Class on every card</b>, colour coded: Marksman, Assassin, Mystic, Brawler</li><li><b>Search box</b>: hero name, class, tag, weapon type or difficulty — several words narrow it down (e.g. <i>brawler tank</i>)</li><li><b>Class filter buttons</b> plus a <span class="GreenColor">Beginner</span> button for heroes the game recommends to new players</li><li><b>Hover details</b>: class, difficulty, weapon type, a one-line role and the playstyle summary</li></ul>All hero information is read from the game's own data when the mod is built.<h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> HUD Fit and 4:3 Video</li><li><span class="RedColor">Conflicts with</span> other mods that replace the hero select popup or hero card layouts</li><li>After a game update, if hero select looks wrong, <span class="RedColor">disable the mod</span> until an updated build is posted</li></ul></div></details>
+    <button class="more" data-open="dlg-heroselect">Details</button>
   </div>
 </article>
+<dialog id="dlg-heroselect" style="--accent:#4fd1c5" aria-label="Hero Select Plus">
+  <div class="dlg-head"><h2>Hero Select Plus</h2><a class="btn" href="downloads/hero_select_plus_v1.0.zip" download>Download 1.0</a>
+    <button class="close" aria-label="Close">&times;</button></div>
+  <div class="dlg-body"><div class="desc"><h2>Learn the heroes faster</h2>Hero Select Plus makes the hero select screen easier to read, especially if you are new to Deadlock.<h2>Features</h2><ul><li><b>Hero names</b> always visible on every card</li><li><b>Class on every card</b>, colour coded: Marksman, Assassin, Mystic, Brawler</li><li><b>Search box</b>: hero name, class, tag, weapon type or difficulty — several words narrow it down (e.g. <i>brawler tank</i>)</li><li><b>Class filter buttons</b> plus a <span class="GreenColor">Beginner</span> button for heroes the game recommends to new players</li><li><b>Hover details</b>: class, difficulty, weapon type, a one-line role and the playstyle summary</li></ul>All hero information is read from the game's own data when the mod is built.<h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> HUD Fit and 4:3 Video</li><li><span class="RedColor">Conflicts with</span> other mods that replace the hero select popup or hero card layouts</li><li>After a game update, if hero select looks wrong, <span class="RedColor">disable the mod</span> until an updated build is posted</li></ul></div></div>
+</dialog>
 </div>
 
 <section class="install">
@@ -110,5 +142,23 @@ footer { text-align:center; color:var(--muted); font-size:13px; padding:10px 0 4
 
 <footer>Questions or bugs: <a href="https://github.com/GREEB/mods/issues">open an issue on GitHub</a> &middot; Not affiliated with Valve.</footer>
 </div>
+<script>
+document.querySelectorAll("[data-open]").forEach(function (b) {
+  b.addEventListener("click", function () { document.getElementById(b.dataset.open).showModal(); });
+});
+document.querySelectorAll("dialog").forEach(function (d) {
+  d.addEventListener("click", function (e) { if (e.target === d) d.close(); });   // click outside closes
+  d.querySelector(".close").addEventListener("click", function () { d.close(); });
+  d.querySelectorAll(".thumbs button").forEach(function (t) {
+    t.addEventListener("click", function () {
+      var fig = d.querySelector(".shot");
+      fig.querySelector("img").src = t.dataset.full;
+      fig.querySelector("a").href = t.dataset.big;
+      fig.querySelector("figcaption").textContent = t.dataset.caption;
+      d.querySelectorAll(".thumbs button").forEach(function (o) { o.setAttribute("aria-current", o === t); });
+    });
+  });
+});
+</script>
 </body>
 </html>
