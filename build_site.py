@@ -86,9 +86,6 @@ header img {{ width:88px; height:88px; border-radius:20px }}
 header h1 {{ margin:12px 0 4px; font-size:34px; letter-spacing:1px }}
 header h1 span {{ color:#d4573a }}
 header p {{ margin:0; color:var(--muted) }}
-.note {{ max-width:760px; margin:20px auto 0; padding:12px 16px; border:1px solid var(--line); border-radius:10px;
-        background:#15120fcc; color:var(--muted); font-size:14px; text-align:left }}
-.note b {{ color:var(--text) }}
 .grid {{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px; margin:28px 0 }}
 .card {{ background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; display:flex; flex-direction:column }}
 .card img {{ width:100%; aspect-ratio:16/9; object-fit:cover; display:block; background:#000 }}
@@ -120,8 +117,6 @@ footer {{ text-align:center; color:var(--muted); font-size:13px; padding:10px 0 
   <img src="img/avatar.png" alt="">
   <h1>dirtytomat<span>0</span></h1>
   <p>Deadlock mods &middot; free downloads</p>
-  <div class="note"><b>Note:</b> AI was used to make these mods. They are tested in game, but use them at your own risk;
-  if the game updates and something looks wrong, turn the mod off until an update is posted here.</div>
 </header>
 
 <div class="grid">
