@@ -40,7 +40,9 @@ MODS = [
      "dist": os.path.join(HOME, "deadlock-4x3/dist/release"), "prefix": "aspect_4x3_v"},
     {"key": "heroselect", "folder": "Hero Select Plus", "name": "Hero Select Plus", "accent": "#4fd1c5",
      "tagline": "Hero names, classes, search and filters on the hero select screen.",
-     "dist": os.path.join(HOME, "deadlockmod/dist/release"), "prefix": "hero_select_plus_v"},
+     "dist": os.path.join(HOME, "deadlockmod/dist/release"), "prefix": "hero_select_plus_v",
+     "shots": [(os.path.join(HERE, "shots/heroselect_grid.png"), "Class on every card, search box, class and Beginner filters"),
+               (os.path.join(HERE, "shots/heroselect_closeup.png"), "Close-up: hero names and colour-coded classes")]},
 ]
 
 
@@ -68,7 +70,7 @@ def details_html(folder):
 
 
 def jpg(src, dst, width):
-    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", src, "-vf", "scale=%d:-2" % width, "-q:v", "3", dst],
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", src, "-vf", "scale='min(%d,iw)':-2" % width, "-q:v", "3", dst],
                    check=True)
 
 
