@@ -28,8 +28,12 @@ import descriptions  # noqa: E402  (per-mod GameBanana texts, reused here)
 MODS = [
     {"key": "hudfit", "folder": "HUD Fit", "name": "HUD Fit", "accent": "#ffc83c",
      "tagline": "Move, resize and de-stretch every HUD element, live in game.",
+     "points": ["De-stretch the HUD for 4:3 stretched (or 5:4, 16:10)",
+                "Scale the whole UI, or each element on its own, including the shop",
+                "Drag any of 23 elements on the real HUD, with snapping and centering",
+                "Hide, lock and reset elements; save and share layouts",
+                "Fixes the health bar disappearing at 4:3"],
      "dist": os.path.join(HOME, "deadlock-hudfit/dist/release"), "prefix": "hud_fit_v",
-     "source": "https://github.com/GREEB/deadlock-hudfit",
      "shots": [("20261003085728_1.jpg", "Before: the stock HUD at 4:3 stretched"),
                ("20261003085833_1.jpg", "After: de-stretched, resized and a filter, with HUD Fit"),
                ("20261003082723_1.jpg", "The editor opens over the live HUD (Esc, then HUD Fit)"),
@@ -37,9 +41,17 @@ MODS = [
                ("20261003084800_1.jpg", "Show all outlines: every element you can move and resize")]},
     {"key": "aspect43", "folder": "4-3 Video", "name": "4:3 Video", "accent": "#b48cff",
      "tagline": "Adds a 4x3 aspect ratio button to the video settings, without hiding new settings.",
+     "points": ["4x3 next to 16:9, 16:10 and 21:9 in Settings \u2192 Video",
+                "Lists the 4:3 resolutions your driver offers (1600x1200, 1440x1080...)",
+                "Never replaces the settings screen, so new game settings keep showing",
+                "Made to be used with HUD Fit"],
      "dist": os.path.join(HOME, "deadlock-4x3/dist/release"), "prefix": "aspect_4x3_v"},
     {"key": "heroselect", "folder": "Hero Select Plus", "name": "Hero Select Plus", "accent": "#4fd1c5",
      "tagline": "Hero names, classes, search and filters on the hero select screen.",
+     "points": ["Names and colour-coded classes on every hero card",
+                "Search by name, class, tag, weapon type or difficulty",
+                "Class filters and a Beginner button",
+                "Hover details: role, difficulty and playstyle"],
      "dist": os.path.join(HOME, "deadlockmod/dist/release"), "prefix": "hero_select_plus_v",
      "shots": [(os.path.join(HERE, "shots/heroselect_grid.png"), "Class on every card, search box, class and Beginner filters"),
                (os.path.join(HERE, "shots/heroselect_closeup.png"), "Close-up: hero names and colour-coded classes")]},
@@ -79,41 +91,77 @@ PAGE = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>dirtytomat0 Deadlock Mods</title>
-<meta name="description" content="Deadlock mods by dirtytomat0: HUD Fit, 4:3 Video, Hero Select Plus. Free downloads.">
-<link rel="icon" href="img/avatar.png">
+<title>Deadlock Mods: HUD Fit (de-stretch / scale HUD), 4:3 Video, Hero Select Plus</title>
+<meta name="description" content="Free Deadlock mods: HUD Fit de-stretches, scales and moves the HUD and shop for 4:3 stretched or any resolution; 4:3 Video adds a 4x3 aspect ratio option; Hero Select Plus adds hero search and class filters.">
+<meta property="og:title" content="Deadlock Mods: HUD Fit, 4:3 Video, Hero Select Plus">
+<meta property="og:description" content="De-stretch and scale the Deadlock HUD, add a 4x3 aspect ratio, find heroes faster. Free downloads.">
+<meta property="og:image" content="https://greeb.github.io/mods/img/hudfit.jpg">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {{ --bg:#0f0d0b; --panel:#1a1612; --line:#3a3026; --gold:#c9a45c; --text:#efe6d6; --muted:#a89a82; }}
+:root {{ --bg:#0e0c0a; --panel:#17130f; --panel2:#1f1a14; --line:#2f271f; --gold:#d6ae62; --text:#f1e9db; --muted:#a3967f;
+        --tomato:#d4573a; --head:"Rajdhani","Bahnschrift",system-ui,sans-serif }}
 * {{ box-sizing:border-box }}
-body {{ margin:0; background:radial-gradient(ellipse at 50% 0%, #2a211a 0%, var(--bg) 60%) fixed; background-color:var(--bg);
-       color:var(--text); font:16px/1.6 "Bahnschrift","Segoe UI",system-ui,sans-serif }}
+html {{ scroll-behavior:smooth; scroll-padding-top:72px }}
+body {{ margin:0; background:var(--bg); color:var(--text); font:16px/1.65 "Inter","Segoe UI",system-ui,sans-serif }}
 a {{ color:var(--gold) }}
-.wrap {{ max-width:1100px; margin:0 auto; padding:0 16px }}
-header {{ text-align:center; padding:48px 0 24px }}
-header img {{ width:88px; height:88px; border-radius:20px }}
-header h1 {{ margin:12px 0 4px; font-size:34px; letter-spacing:1px }}
-header h1 span {{ color:#d4573a }}
-header p {{ margin:0; color:var(--muted) }}
-.grid {{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px; margin:28px 0 }}
-.card {{ background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; display:flex; flex-direction:column }}
-.card img {{ width:100%; aspect-ratio:16/9; object-fit:cover; display:block; background:#000 }}
-.body {{ padding:16px 18px 18px; display:flex; flex-direction:column; gap:10px; flex:1 }}
-.body h2 {{ margin:0; font-size:24px }}
-.body p {{ margin:0; color:var(--muted) }}
-.meta {{ font-size:13px; color:var(--muted) }}
-.btn {{ display:block; text-align:center; padding:11px 14px; border-radius:9px; font-weight:700; text-decoration:none;
-       color:#14110e; background:var(--accent); margin-top:auto }}
+.wrap {{ max-width:1120px; margin:0 auto; padding:0 20px }}
+
+/* nav */
+nav {{ position:sticky; top:0; z-index:10; background:#0e0c0acc; backdrop-filter:blur(10px); border-bottom:1px solid var(--line) }}
+nav .wrap {{ display:flex; align-items:center; gap:24px; height:60px }}
+.brand {{ display:flex; align-items:center; text-decoration:none }}
+.brand img {{ width:40px; height:40px; display:block; transition:transform .2s }}
+.brand:hover img {{ transform:rotate(-12deg) scale(1.06) }}
+nav ul {{ display:flex; gap:4px; list-style:none; margin:0 0 0 auto; padding:0 }}
+nav ul a {{ display:block; padding:6px 12px; border-radius:8px; color:var(--muted); text-decoration:none; font-weight:500; font-size:15px }}
+nav ul a:hover {{ color:var(--text); background:var(--panel2) }}
+@media (max-width:720px) {{ nav ul .opt {{ display:none }} }}
+
+/* hero */
+.hero {{ padding:72px 0 40px; text-align:center;
+         background:radial-gradient(ellipse 60% 70% at 50% 0%, #3a2a1a55, transparent 70%) }}
+.hero h1 {{ font-family:var(--head); font-weight:700; font-size:clamp(34px, 6vw, 58px); line-height:1.05; margin:0 0 14px; letter-spacing:.5px }}
+.hero h1 em {{ font-style:normal; color:var(--gold) }}
+.hero p {{ max-width:620px; margin:0 auto; color:var(--muted); font-size:18px }}
+.chips {{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:24px }}
+.chips a {{ padding:7px 14px; border:1px solid var(--line); border-radius:99px; text-decoration:none; color:var(--text);
+           font-size:14px; background:var(--panel) }}
+.chips a:hover {{ border-color:var(--c) }}
+.chips a i {{ display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--c); margin-right:8px }}
+
+/* mods */
+.mod {{ display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:center; padding:48px 0; border-top:1px solid var(--line) }}
+.mod:nth-of-type(even) .media {{ order:2 }}
+.media {{ position:relative; border-radius:16px; overflow:hidden; border:1px solid var(--line); box-shadow:0 20px 60px #0008 }}
+.media img {{ width:100%; aspect-ratio:16/9; object-fit:cover; display:block; background:#000 }}
+.media button {{ position:absolute; inset:0; border:0; background:none; cursor:zoom-in }}
+.info h2 {{ font-family:var(--head); font-size:38px; margin:0; line-height:1.1 }}
+.tag {{ color:var(--accent); font-weight:600; margin:6px 0 14px }}
+.info ul {{ list-style:none; padding:0; margin:0 0 22px }}
+.info li {{ position:relative; padding-left:22px; margin:6px 0; color:#d9cdb8 }}
+.info li::before {{ content:""; position:absolute; left:2px; top:.62em; width:8px; height:8px; border-radius:2px;
+                    background:var(--accent); transform:rotate(45deg) }}
+.actions {{ display:flex; flex-wrap:wrap; gap:10px; align-items:center }}
+.btn {{ display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:10px; font-weight:600; text-decoration:none;
+       color:#14110e; background:var(--accent); border:0; font-size:15px; font-family:inherit; cursor:pointer }}
 .btn:hover {{ filter:brightness(1.1) }}
-.more {{ background:none; border:1px solid var(--line); color:var(--gold); border-radius:9px; padding:9px 14px;
-        font:inherit; cursor:pointer }}
-.more:hover {{ border-color:var(--gold) }}
+.btn svg {{ width:18px; height:18px }}
+.ghost {{ background:none; color:var(--text); border:1px solid var(--line) }}
+.ghost:hover {{ border-color:var(--accent); filter:none }}
+.meta {{ font-size:13px; color:var(--muted); width:100% }}
+@media (max-width:860px) {{ .mod {{ grid-template-columns:1fr; gap:22px; padding:36px 0 }} .mod:nth-of-type(even) .media {{ order:0 }} }}
+
+/* dialog */
 dialog {{ width:min(1000px, calc(100vw - 32px)); max-height:calc(100vh - 32px); padding:0; border:1px solid var(--line);
-          border-radius:14px; background:var(--panel); color:var(--text) }}
-dialog::backdrop {{ background:#000c }}
+          border-radius:16px; background:var(--panel); color:var(--text) }}
+dialog::backdrop {{ background:#000c; backdrop-filter:blur(3px) }}
 .dlg-head {{ position:sticky; top:0; z-index:1; display:flex; align-items:center; gap:12px; padding:12px 16px;
              background:var(--panel); border-bottom:1px solid var(--line) }}
-.dlg-head h2 {{ margin:0; font-size:22px; flex:1 }}
-.dlg-head .btn {{ margin:0; padding:8px 14px }}
+.dlg-head h2 {{ margin:0; font-family:var(--head); font-size:26px; flex:1 }}
+.dlg-head .btn {{ padding:8px 14px }}
 .close {{ background:none; border:0; color:var(--muted); font-size:28px; line-height:1; cursor:pointer; padding:0 4px }}
 .dlg-body {{ padding:16px }}
 .shot {{ margin:0 }}
@@ -129,51 +177,72 @@ dialog::backdrop {{ background:#000c }}
 .desc ul {{ padding-left:20px; margin:4px 0 }}
 .desc hr {{ border:0; border-top:1px solid var(--line) }}
 .GreenColor {{ color:#8fd46a }} .RedColor {{ color:#ff7a68 }} .OrangeColor {{ color:#ffad5a }}
-.install {{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:6px 22px 14px; margin-bottom:28px }}
-.install h2 {{ font-size:22px; margin:14px 0 6px }}
-.install ol {{ padding-left:22px; margin:6px 0 }}
-code {{ background:#0c0a08; padding:1px 6px; border-radius:5px; font-size:14px }}
-footer {{ text-align:center; color:var(--muted); font-size:13px; padding:10px 0 40px }}
+
+/* install */
+.install {{ padding:56px 0 24px; border-top:1px solid var(--line) }}
+.install > h2 {{ font-family:var(--head); font-size:38px; margin:0 0 6px }}
+.install > p {{ color:var(--muted); margin:0 0 24px }}
+.steps {{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px }}
+.step {{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px 22px }}
+.step h3 {{ margin:0 0 8px; font-size:18px }}
+.step h3 small {{ font-size:12px; font-weight:600; color:#14110e; background:var(--gold); padding:2px 8px; border-radius:99px;
+                  margin-left:8px; vertical-align:middle }}
+.step ol {{ padding-left:20px; margin:0; color:#d9cdb8; font-size:15px }}
+.step li {{ margin:4px 0 }}
+code {{ background:#0a0907; border:1px solid var(--line); padding:1px 6px; border-radius:5px; font-size:13px }}
+.note {{ margin-top:16px; color:var(--muted); font-size:15px }}
+footer {{ border-top:1px solid var(--line); margin-top:40px }}
+footer .wrap {{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; padding:22px 20px 36px;
+               color:var(--muted); font-size:14px }}
+footer img {{ width:28px; height:28px; vertical-align:middle; margin-right:8px }}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <img src="img/avatar.png" alt="">
-  <h1>dirtytomat<span>0</span></h1>
-  <p>Deadlock mods &middot; free downloads</p>
-</header>
+<nav><div class="wrap">
+  <a class="brand" href="#top" aria-label="Home"><img src="img/logo.png" alt="Logo"></a>
+  <ul>
+    {navlinks}
+    <li><a href="#install">Install</a></li>
+    <li class="opt"><a href="{repo}/issues">Report a bug</a></li>
+  </ul>
+</div></nav>
 
-<div class="grid">
+<header class="hero" id="top"><div class="wrap">
+  <h1>Deadlock mods for <em>4:3</em>,<br>the HUD and hero select</h1>
+  <p>De-stretch and scale the HUD and shop, add a 4x3 aspect ratio, and find heroes faster. Free, and they work together.</p>
+  <div class="chips">{chips}</div>
+</div></header>
+
+<main class="wrap">
 {cards}
-</div>
 
-<section class="install">
-  <h2>Install with Deadlock Mod Manager</h2>
-  <ol>
-    <li>Download the mod's <code>.zip</code> above (don't unzip it).</li>
-    <li>Open <a href="https://deadlockmods.app/">Deadlock Mod Manager</a> and choose <b>Add Local Mod</b>.</li>
-    <li>Drop the zip in, give it a name, add it, and turn it on.</li>
-  </ol>
-  <h2>Install with Grimoire</h2>
-  <ol>
-    <li>Download the mod's <code>.zip</code> above.</li>
-    <li>In <a href="https://grimoiremods.com/">Grimoire</a>, open <b>Installed</b> and choose <b>Import Local Mods</b>.</li>
-    <li>Pick the zip and turn the mod on.</li>
-  </ol>
-  <h2>Install by hand</h2>
-  <ol>
-    <li>Unzip the download: it contains <code>pak01_dir.vpk</code>.</li>
-    <li>Copy it to <code>Steam/steamapps/common/Deadlock/game/citadel/addons</code> and rename it to the next free number
-        (<code>pak01_dir.vpk</code>, <code>pak02_dir.vpk</code>, ...; the game stops at the first missing number).</li>
-    <li>The game only loads that folder once mods are enabled in <code>gameinfo.gi</code>; the Mod Manager does this for you.</li>
-  </ol>
-  <h2>Updating</h2>
-  <p>Download the new zip from this page and add it again (remove the old one in your mod manager first).</p>
+<section class="install" id="install">
+  <h2>Install</h2>
+  <p>Download a mod's <code>.zip</code> above, then add it in your mod manager or by hand.</p>
+  <div class="steps">
+    <div class="step"><h3>Deadlock Mod Manager <small>easiest</small></h3><ol>
+      <li>Open <a href="https://deadlockmods.app/">Deadlock Mod Manager</a> and choose <b>Add Local Mod</b>.</li>
+      <li>Drop the zip in (don't unzip it), name it, add it, and turn it on.</li>
+    </ol></div>
+    <div class="step"><h3>Grimoire</h3><ol>
+      <li>In <a href="https://grimoiremods.com/">Grimoire</a>, open <b>Installed</b> and choose <b>Import Local Mods</b>.</li>
+      <li>Pick the zip and turn the mod on.</li>
+    </ol></div>
+    <div class="step"><h3>By hand</h3><ol>
+      <li>Unzip it. It contains <code>pak01_dir.vpk</code>.</li>
+      <li>Copy that file to <code>Deadlock/game/citadel/addons</code> and rename it to the next free number
+          (<code>pak02_dir.vpk</code>, ...). The game stops loading at the first missing number.</li>
+      <li>Mods must be enabled in <code>gameinfo.gi</code>. A mod manager does this for you.</li>
+    </ol></div>
+  </div>
+  <p class="note"><b>Updating:</b> remove the old version in your mod manager, then add the new zip from this page.</p>
 </section>
+</main>
 
-<footer>Questions or bugs: <a href="{repo}/issues">open an issue on GitHub</a> &middot; Not affiliated with Valve.</footer>
-</div>
+<footer><div class="wrap">
+  <span><img src="img/logo.png" alt="">Made by dirtytomat0, with AI. Not affiliated with Valve.</span>
+  <span>Questions or bugs: <a href="{repo}/issues">open an issue on GitHub</a></span>
+</div></footer>
 <script>
 document.querySelectorAll("[data-open]").forEach(function (b) {{
   b.addEventListener("click", function () {{ document.getElementById(b.dataset.open).showModal(); }});
@@ -196,16 +265,22 @@ document.querySelectorAll("dialog").forEach(function (d) {{
 </html>
 """
 
-CARD = """<article class="card" style="--accent:{accent}">
-  <img src="img/{key}.jpg" alt="{name}" loading="lazy">
-  <div class="body">
+DOWNLOAD_ICON = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" '
+                 'stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>')
+
+CARD = """<section class="mod" id="{key}" style="--accent:{accent}">
+  <div class="media"><img src="img/{key}.jpg" alt="{name}" loading="lazy"><button data-open="dlg-{key}" aria-label="{name} details"></button></div>
+  <div class="info">
     <h2>{name}</h2>
-    <p>{tagline}</p>
-    <div class="meta">Version {version} &middot; {size} KB{source}</div>
-    <a class="btn" href="downloads/{zip}" download>Download {name} {version}</a>
-    <button class="more" data-open="dlg-{key}">{more}</button>
+    <div class="tag">{tagline}</div>
+    <ul>{points}</ul>
+    <div class="actions">
+      <a class="btn" href="downloads/{zip}" download>""" + DOWNLOAD_ICON + """Download v{version}</a>
+      <button class="btn ghost" data-open="dlg-{key}">{more}</button>
+      <div class="meta">{size} KB zip</div>
+    </div>
   </div>
-</article>
+</section>
 <dialog id="dlg-{key}" style="--accent:{accent}" aria-label="{name}">
   <div class="dlg-head"><h2>{name}</h2><a class="btn" href="downloads/{zip}" download>Download {version}</a>
     <button class="close" aria-label="Close">&times;</button></div>
@@ -240,7 +315,10 @@ def gallery_html(m):
 def main():
     os.makedirs(os.path.join(DOCS, "img"), exist_ok=True)
     os.makedirs(os.path.join(DOCS, "downloads"), exist_ok=True)
-    shutil.copyfile(os.path.join(BRANDING, "out/avatar_dark_256.png"), os.path.join(DOCS, "img/avatar.png"))
+    shutil.copyfile(os.path.join(BRANDING, "out/avatar_transparent_256.png"), os.path.join(DOCS, "img/logo.png"))
+    old_avatar = os.path.join(DOCS, "img/avatar.png")
+    if os.path.exists(old_avatar):
+        os.remove(old_avatar)
     cards, keep = [], set()
     for m in MODS:
         version, zipname = latest_zip(m)
@@ -248,9 +326,9 @@ def main():
         keep.add(zipname)
         jpg(os.path.join(BRANDING, "out", m["key"] + ".png"), os.path.join(DOCS, "img", m["key"] + ".jpg"), 960)
         size = os.path.getsize(os.path.join(DOCS, "downloads", zipname)) // 1024 + 1
-        source = ' &middot; <a href="%s">source</a>' % m["source"] if m.get("source") else ""
+        points = "".join("<li>%s</li>" % html.escape(p) for p in m["points"])
         cards.append(CARD.format(accent=m["accent"], key=m["key"], name=html.escape(m["name"]),
-                                 tagline=html.escape(m["tagline"]), version=version, size=size, source=source,
+                                 tagline=html.escape(m["tagline"]), version=version, size=size, points=points,
                                  zip=zipname, details=details_html(m["folder"]), gallery=gallery_html(m),
                                  more="Details &amp; screenshots" if m.get("shots") else "Details"))
         print("%-17s v%s  %s" % (m["name"], version, zipname))
@@ -259,7 +337,9 @@ def main():
         if f not in keep:
             os.remove(os.path.join(DOCS, "downloads", f))
     with open(os.path.join(DOCS, "index.html"), "w", encoding="utf-8") as f:
-        f.write(PAGE.format(cards="\n".join(cards), repo=REPO))
+        navlinks = "\n    ".join('<li class="opt"><a href="#%s">%s</a></li>' % (m["key"], html.escape(m["name"])) for m in MODS)
+        chips = "".join('<a href="#%s" style="--c:%s"><i></i>%s</a>' % (m["key"], m["accent"], html.escape(m["name"])) for m in MODS)
+        f.write(PAGE.format(cards="\n".join(cards), repo=REPO, navlinks=navlinks, chips=chips))
     open(os.path.join(DOCS, ".nojekyll"), "w").close()
     print("wrote", os.path.join(DOCS, "index.html"))
 

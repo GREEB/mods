@@ -3,41 +3,77 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>dirtytomat0 Deadlock Mods</title>
-<meta name="description" content="Deadlock mods by dirtytomat0: HUD Fit, 4:3 Video, Hero Select Plus. Free downloads.">
-<link rel="icon" href="img/avatar.png">
+<title>Deadlock Mods: HUD Fit (de-stretch / scale HUD), 4:3 Video, Hero Select Plus</title>
+<meta name="description" content="Free Deadlock mods: HUD Fit de-stretches, scales and moves the HUD and shop for 4:3 stretched or any resolution; 4:3 Video adds a 4x3 aspect ratio option; Hero Select Plus adds hero search and class filters.">
+<meta property="og:title" content="Deadlock Mods: HUD Fit, 4:3 Video, Hero Select Plus">
+<meta property="og:description" content="De-stretch and scale the Deadlock HUD, add a 4x3 aspect ratio, find heroes faster. Free downloads.">
+<meta property="og:image" content="https://greeb.github.io/mods/img/hudfit.jpg">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root { --bg:#0f0d0b; --panel:#1a1612; --line:#3a3026; --gold:#c9a45c; --text:#efe6d6; --muted:#a89a82; }
+:root { --bg:#0e0c0a; --panel:#17130f; --panel2:#1f1a14; --line:#2f271f; --gold:#d6ae62; --text:#f1e9db; --muted:#a3967f;
+        --tomato:#d4573a; --head:"Rajdhani","Bahnschrift",system-ui,sans-serif }
 * { box-sizing:border-box }
-body { margin:0; background:radial-gradient(ellipse at 50% 0%, #2a211a 0%, var(--bg) 60%) fixed; background-color:var(--bg);
-       color:var(--text); font:16px/1.6 "Bahnschrift","Segoe UI",system-ui,sans-serif }
+html { scroll-behavior:smooth; scroll-padding-top:72px }
+body { margin:0; background:var(--bg); color:var(--text); font:16px/1.65 "Inter","Segoe UI",system-ui,sans-serif }
 a { color:var(--gold) }
-.wrap { max-width:1100px; margin:0 auto; padding:0 16px }
-header { text-align:center; padding:48px 0 24px }
-header img { width:88px; height:88px; border-radius:20px }
-header h1 { margin:12px 0 4px; font-size:34px; letter-spacing:1px }
-header h1 span { color:#d4573a }
-header p { margin:0; color:var(--muted) }
-.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px; margin:28px 0 }
-.card { background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; display:flex; flex-direction:column }
-.card img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; background:#000 }
-.body { padding:16px 18px 18px; display:flex; flex-direction:column; gap:10px; flex:1 }
-.body h2 { margin:0; font-size:24px }
-.body p { margin:0; color:var(--muted) }
-.meta { font-size:13px; color:var(--muted) }
-.btn { display:block; text-align:center; padding:11px 14px; border-radius:9px; font-weight:700; text-decoration:none;
-       color:#14110e; background:var(--accent); margin-top:auto }
+.wrap { max-width:1120px; margin:0 auto; padding:0 20px }
+
+/* nav */
+nav { position:sticky; top:0; z-index:10; background:#0e0c0acc; backdrop-filter:blur(10px); border-bottom:1px solid var(--line) }
+nav .wrap { display:flex; align-items:center; gap:24px; height:60px }
+.brand { display:flex; align-items:center; text-decoration:none }
+.brand img { width:40px; height:40px; display:block; transition:transform .2s }
+.brand:hover img { transform:rotate(-12deg) scale(1.06) }
+nav ul { display:flex; gap:4px; list-style:none; margin:0 0 0 auto; padding:0 }
+nav ul a { display:block; padding:6px 12px; border-radius:8px; color:var(--muted); text-decoration:none; font-weight:500; font-size:15px }
+nav ul a:hover { color:var(--text); background:var(--panel2) }
+@media (max-width:720px) { nav ul .opt { display:none } }
+
+/* hero */
+.hero { padding:72px 0 40px; text-align:center;
+         background:radial-gradient(ellipse 60% 70% at 50% 0%, #3a2a1a55, transparent 70%) }
+.hero h1 { font-family:var(--head); font-weight:700; font-size:clamp(34px, 6vw, 58px); line-height:1.05; margin:0 0 14px; letter-spacing:.5px }
+.hero h1 em { font-style:normal; color:var(--gold) }
+.hero p { max-width:620px; margin:0 auto; color:var(--muted); font-size:18px }
+.chips { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:24px }
+.chips a { padding:7px 14px; border:1px solid var(--line); border-radius:99px; text-decoration:none; color:var(--text);
+           font-size:14px; background:var(--panel) }
+.chips a:hover { border-color:var(--c) }
+.chips a i { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--c); margin-right:8px }
+
+/* mods */
+.mod { display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:center; padding:48px 0; border-top:1px solid var(--line) }
+.mod:nth-of-type(even) .media { order:2 }
+.media { position:relative; border-radius:16px; overflow:hidden; border:1px solid var(--line); box-shadow:0 20px 60px #0008 }
+.media img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; background:#000 }
+.media button { position:absolute; inset:0; border:0; background:none; cursor:zoom-in }
+.info h2 { font-family:var(--head); font-size:38px; margin:0; line-height:1.1 }
+.tag { color:var(--accent); font-weight:600; margin:6px 0 14px }
+.info ul { list-style:none; padding:0; margin:0 0 22px }
+.info li { position:relative; padding-left:22px; margin:6px 0; color:#d9cdb8 }
+.info li::before { content:""; position:absolute; left:2px; top:.62em; width:8px; height:8px; border-radius:2px;
+                    background:var(--accent); transform:rotate(45deg) }
+.actions { display:flex; flex-wrap:wrap; gap:10px; align-items:center }
+.btn { display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:10px; font-weight:600; text-decoration:none;
+       color:#14110e; background:var(--accent); border:0; font-size:15px; font-family:inherit; cursor:pointer }
 .btn:hover { filter:brightness(1.1) }
-.more { background:none; border:1px solid var(--line); color:var(--gold); border-radius:9px; padding:9px 14px;
-        font:inherit; cursor:pointer }
-.more:hover { border-color:var(--gold) }
+.btn svg { width:18px; height:18px }
+.ghost { background:none; color:var(--text); border:1px solid var(--line) }
+.ghost:hover { border-color:var(--accent); filter:none }
+.meta { font-size:13px; color:var(--muted); width:100% }
+@media (max-width:860px) { .mod { grid-template-columns:1fr; gap:22px; padding:36px 0 } .mod:nth-of-type(even) .media { order:0 } }
+
+/* dialog */
 dialog { width:min(1000px, calc(100vw - 32px)); max-height:calc(100vh - 32px); padding:0; border:1px solid var(--line);
-          border-radius:14px; background:var(--panel); color:var(--text) }
-dialog::backdrop { background:#000c }
+          border-radius:16px; background:var(--panel); color:var(--text) }
+dialog::backdrop { background:#000c; backdrop-filter:blur(3px) }
 .dlg-head { position:sticky; top:0; z-index:1; display:flex; align-items:center; gap:12px; padding:12px 16px;
              background:var(--panel); border-bottom:1px solid var(--line) }
-.dlg-head h2 { margin:0; font-size:22px; flex:1 }
-.dlg-head .btn { margin:0; padding:8px 14px }
+.dlg-head h2 { margin:0; font-family:var(--head); font-size:26px; flex:1 }
+.dlg-head .btn { padding:8px 14px }
 .close { background:none; border:0; color:var(--muted); font-size:28px; line-height:1; cursor:pointer; padding:0 4px }
 .dlg-body { padding:16px }
 .shot { margin:0 }
@@ -53,95 +89,127 @@ dialog::backdrop { background:#000c }
 .desc ul { padding-left:20px; margin:4px 0 }
 .desc hr { border:0; border-top:1px solid var(--line) }
 .GreenColor { color:#8fd46a } .RedColor { color:#ff7a68 } .OrangeColor { color:#ffad5a }
-.install { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:6px 22px 14px; margin-bottom:28px }
-.install h2 { font-size:22px; margin:14px 0 6px }
-.install ol { padding-left:22px; margin:6px 0 }
-code { background:#0c0a08; padding:1px 6px; border-radius:5px; font-size:14px }
-footer { text-align:center; color:var(--muted); font-size:13px; padding:10px 0 40px }
+
+/* install */
+.install { padding:56px 0 24px; border-top:1px solid var(--line) }
+.install > h2 { font-family:var(--head); font-size:38px; margin:0 0 6px }
+.install > p { color:var(--muted); margin:0 0 24px }
+.steps { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px }
+.step { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px 22px }
+.step h3 { margin:0 0 8px; font-size:18px }
+.step h3 small { font-size:12px; font-weight:600; color:#14110e; background:var(--gold); padding:2px 8px; border-radius:99px;
+                  margin-left:8px; vertical-align:middle }
+.step ol { padding-left:20px; margin:0; color:#d9cdb8; font-size:15px }
+.step li { margin:4px 0 }
+code { background:#0a0907; border:1px solid var(--line); padding:1px 6px; border-radius:5px; font-size:13px }
+.note { margin-top:16px; color:var(--muted); font-size:15px }
+footer { border-top:1px solid var(--line); margin-top:40px }
+footer .wrap { display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; padding:22px 20px 36px;
+               color:var(--muted); font-size:14px }
+footer img { width:28px; height:28px; vertical-align:middle; margin-right:8px }
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <img src="img/avatar.png" alt="">
-  <h1>dirtytomat<span>0</span></h1>
-  <p>Deadlock mods &middot; free downloads</p>
-</header>
+<nav><div class="wrap">
+  <a class="brand" href="#top" aria-label="Home"><img src="img/logo.png" alt="Logo"></a>
+  <ul>
+    <li class="opt"><a href="#hudfit">HUD Fit</a></li>
+    <li class="opt"><a href="#aspect43">4:3 Video</a></li>
+    <li class="opt"><a href="#heroselect">Hero Select Plus</a></li>
+    <li><a href="#install">Install</a></li>
+    <li class="opt"><a href="https://github.com/GREEB/mods/issues">Report a bug</a></li>
+  </ul>
+</div></nav>
 
-<div class="grid">
-<article class="card" style="--accent:#ffc83c">
-  <img src="img/hudfit.jpg" alt="HUD Fit" loading="lazy">
-  <div class="body">
+<header class="hero" id="top"><div class="wrap">
+  <h1>Deadlock mods for <em>4:3</em>,<br>the HUD and hero select</h1>
+  <p>De-stretch and scale the HUD and shop, add a 4x3 aspect ratio, and find heroes faster. Free, and they work together.</p>
+  <div class="chips"><a href="#hudfit" style="--c:#ffc83c"><i></i>HUD Fit</a><a href="#aspect43" style="--c:#b48cff"><i></i>4:3 Video</a><a href="#heroselect" style="--c:#4fd1c5"><i></i>Hero Select Plus</a></div>
+</div></header>
+
+<main class="wrap">
+<section class="mod" id="hudfit" style="--accent:#ffc83c">
+  <div class="media"><img src="img/hudfit.jpg" alt="HUD Fit" loading="lazy"><button data-open="dlg-hudfit" aria-label="HUD Fit details"></button></div>
+  <div class="info">
     <h2>HUD Fit</h2>
-    <p>Move, resize and de-stretch every HUD element, live in game.</p>
-    <div class="meta">Version 1.2 &middot; 62 KB &middot; <a href="https://github.com/GREEB/deadlock-hudfit">source</a></div>
-    <a class="btn" href="downloads/hud_fit_v1.2.zip" download>Download HUD Fit 1.2</a>
-    <button class="more" data-open="dlg-hudfit">Details &amp; screenshots</button>
+    <div class="tag">Move, resize and de-stretch every HUD element, live in game.</div>
+    <ul><li>De-stretch the HUD for 4:3 stretched (or 5:4, 16:10)</li><li>Scale the whole UI, or each element on its own, including the shop</li><li>Drag any of 23 elements on the real HUD, with snapping and centering</li><li>Hide, lock and reset elements; save and share layouts</li><li>Fixes the health bar disappearing at 4:3</li></ul>
+    <div class="actions">
+      <a class="btn" href="downloads/hud_fit_v1.2.1.zip" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download v1.2.1</a>
+      <button class="btn ghost" data-open="dlg-hudfit">Details &amp; screenshots</button>
+      <div class="meta">62 KB zip</div>
+    </div>
   </div>
-</article>
+</section>
 <dialog id="dlg-hudfit" style="--accent:#ffc83c" aria-label="HUD Fit">
-  <div class="dlg-head"><h2>HUD Fit</h2><a class="btn" href="downloads/hud_fit_v1.2.zip" download>Download 1.2</a>
+  <div class="dlg-head"><h2>HUD Fit</h2><a class="btn" href="downloads/hud_fit_v1.2.1.zip" download>Download 1.2.1</a>
     <button class="close" aria-label="Close">&times;</button></div>
-  <div class="dlg-body"><figure class="shot"><a href="img/shots/hudfit_1_big.jpg" target="_blank"><img src="img/shots/hudfit_1.jpg" alt=""></a><figcaption>Before: the stock HUD at 4:3 stretched</figcaption></figure><div class="thumbs"><button data-full="img/shots/hudfit_1.jpg" data-big="img/shots/hudfit_1_big.jpg" data-caption="Before: the stock HUD at 4:3 stretched" aria-current="true"><img src="img/shots/hudfit_1_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_2.jpg" data-big="img/shots/hudfit_2_big.jpg" data-caption="After: de-stretched, resized and a filter, with HUD Fit" aria-current="false"><img src="img/shots/hudfit_2_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_3.jpg" data-big="img/shots/hudfit_3_big.jpg" data-caption="The editor opens over the live HUD (Esc, then HUD Fit)" aria-current="false"><img src="img/shots/hudfit_3_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_4.jpg" data-big="img/shots/hudfit_4_big.jpg" data-caption="Layers: show, hide, lock or reset every element" aria-current="false"><img src="img/shots/hudfit_4_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_5.jpg" data-big="img/shots/hudfit_5_big.jpg" data-caption="Show all outlines: every element you can move and resize" aria-current="false"><img src="img/shots/hudfit_5_t.jpg" alt="" loading="lazy"></button></div><div class="desc"><h2>Rearrange your HUD, live, in game</h2><b>HUD Fit</b> is an in-game editor for the Deadlock HUD: click any element, drag it, resize it, hide it. Built for <b>4:3 stretched</b> players (de-stretch the HUD so it stops looking wide), useful on any resolution.<br><br><b>Open it:</b> Esc → <b>HUD Fit</b> (under Settings). Best in <span class="OrangeColor">Explore NYC</span> or a sandbox / Hero Testing match — the hideout hides most of the HUD.<h2>Features</h2><ul><li><b>Click, drag, resize</b> any of 22 HUD elements on the real HUD — health bar, abilities, items &amp; souls, weapon/spirit/vitality, minimap, top bar, crosshair &amp; ammo, kill feed, chat, prompts, buffs, damage meter and more</li><li><b>Snapping</b> to screen edges, the centre and other elements; <b>W A S D</b> nudge (Shift = 10 px), <b>+ / −</b> size</li><li><b>Center</b> buttons: put the crosshair or any element exactly in the middle of the screen</li><li><b>Layers panel</b>: show/hide each element in game, lock it, reset it with one click</li><li><b>4:3 stretch fix</b>: de-stretch chosen elements or everything (4:3, 5:4, 16:10 presets)</li><li><b>Scale all items</b>: make the whole HUD bigger or smaller — every element stays at its screen edge</li><li>Fixes the <span class="GreenColor">health bar disappearing at 4:3</span> (the stock layout only fits 16:9 and wider)</li><li><b>Test tab</b>: one-click sandbox situations (damage, low health, death/respawn timer, level up, souls, buffs, enemy bot, trooper wave, DPS meter) so you see the real UI while arranging it</li><li><b>Layouts</b>: Default, Clean and up to <b>20 named layouts</b> — <span class="GreenColor">export / import a layout code</span> to share it</li><li><b>Filters</b> with a strength slider: Monochrome, Sepia, Neon, Ice, Ghost, Focus, Muted</li><li>Everything is <b>saved on your PC</b> and comes back after a restart</li></ul><h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li><li>Made to be used together with <b>4:3 Video</b> (adds a 4x3 aspect ratio option to the video settings)</li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> Hero Select Plus and 4:3 Video</li><li><span class="RedColor">Conflicts with</span> other mods that replace <i>base_hud</i> or <i>hud_escape_menu</i>, and with full HUD overhauls</li><li>After a big game update, if the HUD looks wrong, <span class="RedColor">disable the mod</span> until an updated build is posted</li></ul><h3>Saving &amp; privacy</h3>Layouts are kept in your PC's game browser storage through a tiny page with <b>no network access</b> (nothing is uploaded): <a href="https://greeb.github.io/hudfit-storage/">hudfit-storage</a>.<h3>Open source</h3>Source and community filters: <a href="https://github.com/GREEB/deadlock-hudfit">GitHub</a> — new filters welcome as pull requests.</div></div>
+  <div class="dlg-body"><figure class="shot"><a href="img/shots/hudfit_1_big.jpg" target="_blank"><img src="img/shots/hudfit_1.jpg" alt=""></a><figcaption>Before: the stock HUD at 4:3 stretched</figcaption></figure><div class="thumbs"><button data-full="img/shots/hudfit_1.jpg" data-big="img/shots/hudfit_1_big.jpg" data-caption="Before: the stock HUD at 4:3 stretched" aria-current="true"><img src="img/shots/hudfit_1_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_2.jpg" data-big="img/shots/hudfit_2_big.jpg" data-caption="After: de-stretched, resized and a filter, with HUD Fit" aria-current="false"><img src="img/shots/hudfit_2_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_3.jpg" data-big="img/shots/hudfit_3_big.jpg" data-caption="The editor opens over the live HUD (Esc, then HUD Fit)" aria-current="false"><img src="img/shots/hudfit_3_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_4.jpg" data-big="img/shots/hudfit_4_big.jpg" data-caption="Layers: show, hide, lock or reset every element" aria-current="false"><img src="img/shots/hudfit_4_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_5.jpg" data-big="img/shots/hudfit_5_big.jpg" data-caption="Show all outlines: every element you can move and resize" aria-current="false"><img src="img/shots/hudfit_5_t.jpg" alt="" loading="lazy"></button></div><div class="desc"><h2>Rearrange your HUD, live, in game</h2><b>HUD Fit</b> is an in-game editor for the Deadlock HUD: click any element, drag it, resize it, hide it. Built for <b>4:3 stretched</b> players (de-stretch the HUD so it stops looking wide), useful on any resolution.<br><br><b>Open it:</b> Esc → <b>HUD Fit</b> (under Settings). Best in <span class="OrangeColor">Explore NYC</span> or a sandbox / Hero Testing match — the hideout hides most of the HUD.<h2>Features</h2><ul><li><b>Click, drag, resize</b> any of 23 HUD elements on the real HUD — health bar, abilities, items &amp; souls, weapon/spirit/vitality, minimap, top bar, crosshair &amp; ammo, kill feed, chat, the buy menu (shop), prompts, buffs, damage meter and more</li><li><b>Snapping</b> to screen edges, the centre and other elements; <b>W A S D</b> nudge (Shift = 10 px), <b>+ / −</b> size</li><li><b>Center</b> buttons: put the crosshair or any element exactly in the middle of the screen</li><li><b>Layers panel</b>: show/hide each element in game, lock it, reset it with one click</li><li><b>4:3 stretch fix</b>: de-stretch chosen elements or everything (4:3, 5:4, 16:10 presets)</li><li><b>Scale all items</b>: make the whole HUD bigger or smaller — every element stays at its screen edge</li><li>Fixes the <span class="GreenColor">health bar disappearing at 4:3</span> (the stock layout only fits 16:9 and wider)</li><li><b>Test tab</b>: one-click sandbox situations (damage, low health, death/respawn timer, level up, souls, buffs, enemy bot, trooper wave, DPS meter) so you see the real UI while arranging it</li><li><b>Layouts</b>: Default, Clean and up to <b>20 named layouts</b> — <span class="GreenColor">export / import a layout code</span> to share it</li><li><b>Filters</b> with a strength slider: Monochrome, Sepia, Neon, Ice, Ghost, Focus, Muted</li><li>Everything is <b>saved on your PC</b> and comes back after a restart</li></ul><h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li><li>Made to be used together with <b>4:3 Video</b> (adds a 4x3 aspect ratio option to the video settings)</li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> Hero Select Plus and 4:3 Video</li><li><span class="RedColor">Conflicts with</span> other mods that replace <i>base_hud</i> or <i>hud_escape_menu</i>, and with full HUD overhauls</li><li>After a big game update, if the HUD looks wrong, <span class="RedColor">disable the mod</span> until an updated build is posted</li></ul><h3>Saving &amp; privacy</h3>Layouts are kept in your PC's game browser storage through a tiny page with <b>no network access</b> (nothing is uploaded): <a href="https://greeb.github.io/hudfit-storage/">hudfit-storage</a>.</div></div>
 </dialog>
-<article class="card" style="--accent:#b48cff">
-  <img src="img/aspect43.jpg" alt="4:3 Video" loading="lazy">
-  <div class="body">
+<section class="mod" id="aspect43" style="--accent:#b48cff">
+  <div class="media"><img src="img/aspect43.jpg" alt="4:3 Video" loading="lazy"><button data-open="dlg-aspect43" aria-label="4:3 Video details"></button></div>
+  <div class="info">
     <h2>4:3 Video</h2>
-    <p>Adds a 4x3 aspect ratio button to the video settings, without hiding new settings.</p>
-    <div class="meta">Version 2.0 &middot; 4 KB</div>
-    <a class="btn" href="downloads/aspect_4x3_v2.0.zip" download>Download 4:3 Video 2.0</a>
-    <button class="more" data-open="dlg-aspect43">Details</button>
+    <div class="tag">Adds a 4x3 aspect ratio button to the video settings, without hiding new settings.</div>
+    <ul><li>4x3 next to 16:9, 16:10 and 21:9 in Settings → Video</li><li>Lists the 4:3 resolutions your driver offers (1600x1200, 1440x1080...)</li><li>Never replaces the settings screen, so new game settings keep showing</li><li>Made to be used with HUD Fit</li></ul>
+    <div class="actions">
+      <a class="btn" href="downloads/aspect_4x3_v2.0.zip" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download v2.0</a>
+      <button class="btn ghost" data-open="dlg-aspect43">Details</button>
+      <div class="meta">4 KB zip</div>
+    </div>
   </div>
-</article>
+</section>
 <dialog id="dlg-aspect43" style="--accent:#b48cff" aria-label="4:3 Video">
   <div class="dlg-head"><h2>4:3 Video</h2><a class="btn" href="downloads/aspect_4x3_v2.0.zip" download>Download 2.0</a>
     <button class="close" aria-label="Close">&times;</button></div>
   <div class="dlg-body"><div class="desc"><h2>A 4x3 button in the video settings</h2>Adds a <b>4x3</b> choice to <b>Settings → Video → Aspect Ratio</b>, next to 16:9, 16:10 and 21:9. Pick it and the resolution list shows the 4:3 modes your graphics driver offers.<h2>Why this one</h2><ul><li>Older 4:3 mods ship a whole copy of the settings screen — that <span class="RedColor">hides every newer setting</span> (Down Dash bind, shop binds, subtitle options…) and gets worse with every patch</li><li>4:3 Video <span class="GreenColor">never replaces the settings screen</span>: the button is added to the live screen while it is open, so settings from future game updates always show up</li><li>Remembers your choice: 4x3 stays selected when you reopen the settings</li></ul><h2>Higher 4:3 resolutions</h2>Want <b>1920×1440</b> or similar? The game lists what your graphics driver offers — add them as custom resolutions first (AMD Adrenalin, NVIDIA Control Panel or CRU).<h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li><li><span class="RedColor">Turn off older 4:3 settings mods</span> (they replace the settings screen)</li><li>Made to be used together with <b>HUD Fit</b> — de-stretch, move and resize the HUD for 4:3 stretched</li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> HUD Fit and Hero Select Plus</li><li>Changes only one tiny HUD file (subtitles layout); the settings screen is never touched</li></ul></div></div>
 </dialog>
-<article class="card" style="--accent:#4fd1c5">
-  <img src="img/heroselect.jpg" alt="Hero Select Plus" loading="lazy">
-  <div class="body">
+<section class="mod" id="heroselect" style="--accent:#4fd1c5">
+  <div class="media"><img src="img/heroselect.jpg" alt="Hero Select Plus" loading="lazy"><button data-open="dlg-heroselect" aria-label="Hero Select Plus details"></button></div>
+  <div class="info">
     <h2>Hero Select Plus</h2>
-    <p>Hero names, classes, search and filters on the hero select screen.</p>
-    <div class="meta">Version 1.0 &middot; 19 KB</div>
-    <a class="btn" href="downloads/hero_select_plus_v1.0.zip" download>Download Hero Select Plus 1.0</a>
-    <button class="more" data-open="dlg-heroselect">Details &amp; screenshots</button>
+    <div class="tag">Hero names, classes, search and filters on the hero select screen.</div>
+    <ul><li>Names and colour-coded classes on every hero card</li><li>Search by name, class, tag, weapon type or difficulty</li><li>Class filters and a Beginner button</li><li>Hover details: role, difficulty and playstyle</li></ul>
+    <div class="actions">
+      <a class="btn" href="downloads/hero_select_plus_v1.0.zip" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download v1.0</a>
+      <button class="btn ghost" data-open="dlg-heroselect">Details &amp; screenshots</button>
+      <div class="meta">19 KB zip</div>
+    </div>
   </div>
-</article>
+</section>
 <dialog id="dlg-heroselect" style="--accent:#4fd1c5" aria-label="Hero Select Plus">
   <div class="dlg-head"><h2>Hero Select Plus</h2><a class="btn" href="downloads/hero_select_plus_v1.0.zip" download>Download 1.0</a>
     <button class="close" aria-label="Close">&times;</button></div>
   <div class="dlg-body"><figure class="shot"><a href="img/shots/heroselect_1_big.jpg" target="_blank"><img src="img/shots/heroselect_1.jpg" alt=""></a><figcaption>Class on every card, search box, class and Beginner filters</figcaption></figure><div class="thumbs"><button data-full="img/shots/heroselect_1.jpg" data-big="img/shots/heroselect_1_big.jpg" data-caption="Class on every card, search box, class and Beginner filters" aria-current="true"><img src="img/shots/heroselect_1_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/heroselect_2.jpg" data-big="img/shots/heroselect_2_big.jpg" data-caption="Close-up: hero names and colour-coded classes" aria-current="false"><img src="img/shots/heroselect_2_t.jpg" alt="" loading="lazy"></button></div><div class="desc"><h2>Learn the heroes faster</h2>Hero Select Plus makes the hero select screen easier to read, especially if you are new to Deadlock.<h2>Features</h2><ul><li><b>Hero names</b> always visible on every card</li><li><b>Class on every card</b>, colour coded: Marksman, Assassin, Mystic, Brawler</li><li><b>Search box</b>: hero name, class, tag, weapon type or difficulty — several words narrow it down (e.g. <i>brawler tank</i>)</li><li><b>Class filter buttons</b> plus a <span class="GreenColor">Beginner</span> button for heroes the game recommends to new players</li><li><b>Hover details</b>: class, difficulty, weapon type, a one-line role and the playstyle summary</li></ul>All hero information is read from the game's own data when the mod is built.<h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> HUD Fit and 4:3 Video</li><li><span class="RedColor">Conflicts with</span> other mods that replace the hero select popup or hero card layouts</li><li>After a game update, if hero select looks wrong, <span class="RedColor">disable the mod</span> until an updated build is posted</li></ul></div></div>
 </dialog>
-</div>
 
-<section class="install">
-  <h2>Install with Deadlock Mod Manager</h2>
-  <ol>
-    <li>Download the mod's <code>.zip</code> above (don't unzip it).</li>
-    <li>Open <a href="https://deadlockmods.app/">Deadlock Mod Manager</a> and choose <b>Add Local Mod</b>.</li>
-    <li>Drop the zip in, give it a name, add it, and turn it on.</li>
-  </ol>
-  <h2>Install with Grimoire</h2>
-  <ol>
-    <li>Download the mod's <code>.zip</code> above.</li>
-    <li>In <a href="https://grimoiremods.com/">Grimoire</a>, open <b>Installed</b> and choose <b>Import Local Mods</b>.</li>
-    <li>Pick the zip and turn the mod on.</li>
-  </ol>
-  <h2>Install by hand</h2>
-  <ol>
-    <li>Unzip the download: it contains <code>pak01_dir.vpk</code>.</li>
-    <li>Copy it to <code>Steam/steamapps/common/Deadlock/game/citadel/addons</code> and rename it to the next free number
-        (<code>pak01_dir.vpk</code>, <code>pak02_dir.vpk</code>, ...; the game stops at the first missing number).</li>
-    <li>The game only loads that folder once mods are enabled in <code>gameinfo.gi</code>; the Mod Manager does this for you.</li>
-  </ol>
-  <h2>Updating</h2>
-  <p>Download the new zip from this page and add it again (remove the old one in your mod manager first).</p>
+<section class="install" id="install">
+  <h2>Install</h2>
+  <p>Download a mod's <code>.zip</code> above, then add it in your mod manager or by hand.</p>
+  <div class="steps">
+    <div class="step"><h3>Deadlock Mod Manager <small>easiest</small></h3><ol>
+      <li>Open <a href="https://deadlockmods.app/">Deadlock Mod Manager</a> and choose <b>Add Local Mod</b>.</li>
+      <li>Drop the zip in (don't unzip it), name it, add it, and turn it on.</li>
+    </ol></div>
+    <div class="step"><h3>Grimoire</h3><ol>
+      <li>In <a href="https://grimoiremods.com/">Grimoire</a>, open <b>Installed</b> and choose <b>Import Local Mods</b>.</li>
+      <li>Pick the zip and turn the mod on.</li>
+    </ol></div>
+    <div class="step"><h3>By hand</h3><ol>
+      <li>Unzip it. It contains <code>pak01_dir.vpk</code>.</li>
+      <li>Copy that file to <code>Deadlock/game/citadel/addons</code> and rename it to the next free number
+          (<code>pak02_dir.vpk</code>, ...). The game stops loading at the first missing number.</li>
+      <li>Mods must be enabled in <code>gameinfo.gi</code>. A mod manager does this for you.</li>
+    </ol></div>
+  </div>
+  <p class="note"><b>Updating:</b> remove the old version in your mod manager, then add the new zip from this page.</p>
 </section>
+</main>
 
-<footer>Questions or bugs: <a href="https://github.com/GREEB/mods/issues">open an issue on GitHub</a> &middot; Not affiliated with Valve.</footer>
-</div>
+<footer><div class="wrap">
+  <span><img src="img/logo.png" alt="">Made by dirtytomat0, with AI. Not affiliated with Valve.</span>
+  <span>Questions or bugs: <a href="https://github.com/GREEB/mods/issues">open an issue on GitHub</a></span>
+</div></footer>
 <script>
 document.querySelectorAll("[data-open]").forEach(function (b) {
   b.addEventListener("click", function () { document.getElementById(b.dataset.open).showModal(); });
