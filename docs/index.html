@@ -8,6 +8,11 @@
 <meta property="og:title" content="Deadlock Mods: HUD Fit, 4:3 Video, Hero Select Plus">
 <meta property="og:description" content="De-stretch and scale the Deadlock HUD, add a 4x3 aspect ratio, find heroes faster. Free downloads.">
 <meta property="og:image" content="https://greeb.github.io/mods/img/hudfit.jpg">
+<meta property="og:url" content="https://greeb.github.io/mods/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Deadlock Mods">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://greeb.github.io/mods/">
 <link rel="icon" href="img/logo.png">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I de-stretch the HUD when playing Deadlock 4:3 stretched?", "acceptedAnswer": {"@type": "Answer", "text": "Install HUD Fit, press Esc and choose HUD Fit, open the HUD tab and pick the 4:3 stretch preset. Then turn on De-stretch everything, or de-stretch only the elements you choose."}}, {"@type": "Question", "name": "How do I make the Deadlock UI or shop smaller or bigger?", "acceptedAnswer": {"@type": "Answer", "text": "In HUD Fit, use Scale all items in the HUD tab for the whole HUD. To resize one element, select it (for example Buy menu (shop) under Layers) and change Size %, or drag its corner handle."}}, {"@type": "Question", "name": "How do I get a 4:3 resolution in Deadlock?", "acceptedAnswer": {"@type": "Answer", "text": "Install 4:3 Video, then pick 4x3 under Settings, Video, Aspect Ratio. If the resolution you want is not listed, add it as a custom resolution in your graphics driver (AMD Adrenalin, NVIDIA Control Panel or CRU) first."}}, {"@type": "Question", "name": "Do these mods work together?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. They change different game files. HUD Fit conflicts with other mods that replace base_hud or hud_escape_menu, and Hero Select Plus conflicts with other hero select mods."}}, {"@type": "Question", "name": "A game update broke something. What now?", "acceptedAnswer": {"@type": "Answer", "text": "Turn the mod off in your mod manager until an updated version is posted on this page."}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,6 +72,7 @@ nav ul a:hover { color:var(--text); background:var(--panel2) }
 .strip img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; transition:transform .3s, filter .3s }
 @media (hover:hover) { .strip img { filter:saturate(.6) brightness(.8) } .strip button:hover img { filter:none; transform:scale(1.05) } }
 .strip button:hover { border-color:var(--accent) }
+a.plain { color:inherit; text-decoration:none } a.plain:hover { color:var(--accent) }
 .info h2 { font-family:var(--head); font-size:38px; margin:0; line-height:1.1 }
 .tag { color:var(--accent); font-weight:600; margin:6px 0 14px }
 .info ul { list-style:none; padding:0; margin:0 0 22px }
@@ -156,9 +162,9 @@ footer img { width:28px; height:28px; vertical-align:middle; margin-right:8px }
 <nav><div class="wrap">
   <a class="brand" href="#top" aria-label="Home"><img src="img/logo.png" alt="Logo"></a>
   <ul>
-    <li class="opt"><a href="#hudfit">HUD Fit</a></li>
-    <li class="opt"><a href="#aspect43">4:3 Video</a></li>
-    <li class="opt"><a href="#heroselect">Hero Select Plus</a></li>
+    <li class="opt"><a href="hud-fit/">HUD Fit</a></li>
+    <li class="opt"><a href="4-3-video/">4:3 Video</a></li>
+    <li class="opt"><a href="hero-select-plus/">Hero Select Plus</a></li>
     <li><a href="#install">Install</a></li>
     <li class="opt"><a href="#faq">FAQ</a></li>
     <li class="opt"><a href="https://github.com/GREEB/mods/issues">Report a bug</a></li>
@@ -175,12 +181,12 @@ footer img { width:28px; height:28px; vertical-align:middle; margin-right:8px }
 <section class="mod" id="hudfit" style="--accent:#ffc83c">
   <div class="media shotmedia"><img src="img/shots/hudfit_20261003084800_1.jpg" alt="HUD Fit" loading="lazy"><div class="over"><b>HUD Fit</b><span>5 screenshots</span></div><button data-open="dlg-hudfit" aria-label="HUD Fit details"></button></div>
   <div class="info">
-    <h2>HUD Fit</h2>
+    <h2><a class="plain" href="hud-fit/">HUD Fit</a></h2>
     <div class="tag">Move, resize and de-stretch every HUD element, live in game.</div>
     <ul><li>De-stretch the HUD for 4:3 stretched (or 5:4, 16:10)</li><li>Scale the whole UI, or each element on its own, including the shop</li><li>Drag any of 23 elements on the real HUD, with snapping and centering</li><li>Hide, lock and reset elements; save and share layouts</li><li>Fixes the health bar disappearing at 4:3</li></ul>
     <div class="actions">
       <a class="btn" href="downloads/hud_fit_v1.2.1.zip" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download v1.2.1</a>
-      <button class="btn ghost" data-open="dlg-hudfit">Details &amp; screenshots</button>
+      <a class="btn ghost" href="hud-fit/">Details &amp; screenshots</a>
       <div class="meta">62 KB zip</div>
     </div>
   </div>
@@ -189,7 +195,7 @@ footer img { width:28px; height:28px; vertical-align:middle; margin-right:8px }
 <dialog id="dlg-hudfit" style="--accent:#ffc83c" aria-label="HUD Fit">
   <div class="dlg-head"><h2>HUD Fit</h2><a class="btn" href="downloads/hud_fit_v1.2.1.zip" download>Download 1.2.1</a>
     <button class="close" aria-label="Close">&times;</button></div>
-  <div class="dlg-body"><figure class="shot"><a href="img/shots/hudfit_20261003084800_1_big.jpg" target="_blank"><img src="img/shots/hudfit_20261003084800_1.jpg" alt=""></a><figcaption>Show all outlines: every element you can move and resize</figcaption></figure><div class="thumbs"><button data-full="img/shots/hudfit_20261003084800_1.jpg" data-big="img/shots/hudfit_20261003084800_1_big.jpg" data-caption="Show all outlines: every element you can move and resize" aria-current="true"><img src="img/shots/hudfit_20261003084800_1_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_20261003085728_1.jpg" data-big="img/shots/hudfit_20261003085728_1_big.jpg" data-caption="Before: the stock HUD at 4:3 stretched" aria-current="false"><img src="img/shots/hudfit_20261003085728_1_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_20261003085833_1.jpg" data-big="img/shots/hudfit_20261003085833_1_big.jpg" data-caption="After: de-stretched, resized and a filter, with HUD Fit" aria-current="false"><img src="img/shots/hudfit_20261003085833_1_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_20261003082723_1.jpg" data-big="img/shots/hudfit_20261003082723_1_big.jpg" data-caption="The editor opens over the live HUD (Esc, then HUD Fit)" aria-current="false"><img src="img/shots/hudfit_20261003082723_1_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_20261003085741_1.jpg" data-big="img/shots/hudfit_20261003085741_1_big.jpg" data-caption="Layers: show, hide, lock or reset every element" aria-current="false"><img src="img/shots/hudfit_20261003085741_1_t.jpg" alt="" loading="lazy"></button></div><div class="desc"><h2>Rearrange your HUD, live, in game</h2><b>HUD Fit</b> is an in-game editor for the Deadlock HUD: click any element, drag it, resize it, hide it. Built for <b>4:3 stretched</b> players (de-stretch the HUD so it stops looking wide), useful on any resolution.<br><br><b>Open it:</b> Esc → <b>HUD Fit</b> (under Settings). Best in <span class="OrangeColor">Explore NYC</span> or a sandbox / Hero Testing match — the hideout hides most of the HUD.<h2>Features</h2><ul><li><b>Click, drag, resize</b> any of 23 HUD elements on the real HUD — health bar, abilities, items &amp; souls, weapon/spirit/vitality, minimap, top bar, crosshair &amp; ammo, kill feed, chat, the buy menu (shop), prompts, buffs, damage meter and more</li><li><b>Snapping</b> to screen edges, the centre and other elements; <b>W A S D</b> nudge (Shift = 10 px), <b>+ / −</b> size</li><li><b>Center</b> buttons: put the crosshair or any element exactly in the middle of the screen</li><li><b>Layers panel</b>: show/hide each element in game, lock it, reset it with one click</li><li><b>4:3 stretch fix</b>: de-stretch chosen elements or everything (4:3, 5:4, 16:10 presets)</li><li><b>Scale all items</b>: make the whole HUD bigger or smaller — every element stays at its screen edge</li><li>Fixes the <span class="GreenColor">health bar disappearing at 4:3</span> (the stock layout only fits 16:9 and wider)</li><li><b>Test tab</b>: one-click sandbox situations (damage, low health, death/respawn timer, level up, souls, buffs, enemy bot, trooper wave, DPS meter) so you see the real UI while arranging it</li><li><b>Layouts</b>: Default, Clean and up to <b>20 named layouts</b> — <span class="GreenColor">export / import a layout code</span> to share it</li><li><b>Filters</b> with a strength slider: Monochrome, Sepia, Neon, Ice, Ghost, Focus, Muted</li><li>Everything is <b>saved on your PC</b> and comes back after a restart</li></ul><h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li><li>Made to be used together with <b>4:3 Video</b> (adds a 4x3 aspect ratio option to the video settings)</li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> Hero Select Plus and 4:3 Video</li><li><span class="RedColor">Conflicts with</span> other mods that replace <i>base_hud</i> or <i>hud_escape_menu</i>, and with full HUD overhauls</li><li>After a big game update, if the HUD looks wrong, <span class="RedColor">disable the mod</span> until an updated build is posted</li></ul><h3>Saving &amp; privacy</h3>Layouts are kept in your PC's game browser storage through a tiny page with <b>no network access</b> (nothing is uploaded): <a href="https://greeb.github.io/hudfit-storage/">hudfit-storage</a>.</div></div>
+  <div class="dlg-body"><div class="gallery"><figure class="shot"><a href="img/shots/hudfit_20261003084800_1_big.jpg" target="_blank"><img src="img/shots/hudfit_20261003084800_1.jpg" alt="Show all outlines: every element you can move and resize"></a><figcaption>Show all outlines: every element you can move and resize</figcaption></figure><div class="thumbs"><button data-full="img/shots/hudfit_20261003084800_1.jpg" data-big="img/shots/hudfit_20261003084800_1_big.jpg" data-caption="Show all outlines: every element you can move and resize" aria-current="true"><img src="img/shots/hudfit_20261003084800_1_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_20261003085728_1.jpg" data-big="img/shots/hudfit_20261003085728_1_big.jpg" data-caption="Before: the stock HUD at 4:3 stretched" aria-current="false"><img src="img/shots/hudfit_20261003085728_1_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_20261003085833_1.jpg" data-big="img/shots/hudfit_20261003085833_1_big.jpg" data-caption="After: de-stretched, resized and a filter, with HUD Fit" aria-current="false"><img src="img/shots/hudfit_20261003085833_1_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_20261003082723_1.jpg" data-big="img/shots/hudfit_20261003082723_1_big.jpg" data-caption="The editor opens over the live HUD (Esc, then HUD Fit)" aria-current="false"><img src="img/shots/hudfit_20261003082723_1_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/hudfit_20261003085741_1.jpg" data-big="img/shots/hudfit_20261003085741_1_big.jpg" data-caption="Layers: show, hide, lock or reset every element" aria-current="false"><img src="img/shots/hudfit_20261003085741_1_t.jpg" alt="" loading="lazy"></button></div></div><div class="desc"><h2>Rearrange your HUD, live, in game</h2><b>HUD Fit</b> is an in-game editor for the Deadlock HUD: click any element, drag it, resize it, hide it. Built for <b>4:3 stretched</b> players (de-stretch the HUD so it stops looking wide), useful on any resolution.<br><br><b>Open it:</b> Esc → <b>HUD Fit</b> (under Settings). Best in <span class="OrangeColor">Explore NYC</span> or a sandbox / Hero Testing match — the hideout hides most of the HUD.<h2>Features</h2><ul><li><b>Click, drag, resize</b> any of 23 HUD elements on the real HUD — health bar, abilities, items &amp; souls, weapon/spirit/vitality, minimap, top bar, crosshair &amp; ammo, kill feed, chat, the buy menu (shop), prompts, buffs, damage meter and more</li><li><b>Snapping</b> to screen edges, the centre and other elements; <b>W A S D</b> nudge (Shift = 10 px), <b>+ / −</b> size</li><li><b>Center</b> buttons: put the crosshair or any element exactly in the middle of the screen</li><li><b>Layers panel</b>: show/hide each element in game, lock it, reset it with one click</li><li><b>4:3 stretch fix</b>: de-stretch chosen elements or everything (4:3, 5:4, 16:10 presets)</li><li><b>Scale all items</b>: make the whole HUD bigger or smaller — every element stays at its screen edge</li><li>Fixes the <span class="GreenColor">health bar disappearing at 4:3</span> (the stock layout only fits 16:9 and wider)</li><li><b>Test tab</b>: one-click sandbox situations (damage, low health, death/respawn timer, level up, souls, buffs, enemy bot, trooper wave, DPS meter) so you see the real UI while arranging it</li><li><b>Layouts</b>: Default, Clean and up to <b>20 named layouts</b> — <span class="GreenColor">export / import a layout code</span> to share it</li><li><b>Filters</b> with a strength slider: Monochrome, Sepia, Neon, Ice, Ghost, Focus, Muted</li><li>Everything is <b>saved on your PC</b> and comes back after a restart</li></ul><h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li><li>Made to be used together with <b>4:3 Video</b> (adds a 4x3 aspect ratio option to the video settings)</li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> Hero Select Plus and 4:3 Video</li><li><span class="RedColor">Conflicts with</span> other mods that replace <i>base_hud</i> or <i>hud_escape_menu</i>, and with full HUD overhauls</li><li>After a big game update, if the HUD looks wrong, <span class="RedColor">disable the mod</span> until an updated build is posted</li></ul><h3>Saving &amp; privacy</h3>Layouts are kept in your PC's game browser storage through a tiny page with <b>no network access</b> (nothing is uploaded): <a href="https://greeb.github.io/hudfit-storage/">hudfit-storage</a>.</div></div>
 </dialog>
 <section class="compare" style="--accent:#ffc83c">
   <h3>Before and after</h3>
@@ -205,12 +211,12 @@ footer img { width:28px; height:28px; vertical-align:middle; margin-right:8px }
 <section class="mod flip" id="aspect43" style="--accent:#b48cff">
   <div class="media"><img src="img/aspect43.jpg" alt="4:3 Video" loading="lazy"><button data-open="dlg-aspect43" aria-label="4:3 Video details"></button></div>
   <div class="info">
-    <h2>4:3 Video</h2>
+    <h2><a class="plain" href="4-3-video/">4:3 Video</a></h2>
     <div class="tag">Adds a 4x3 aspect ratio button to the video settings, without hiding new settings.</div>
     <ul><li>4x3 next to 16:9, 16:10 and 21:9 in Settings → Video</li><li>Lists the 4:3 resolutions your driver offers (1600x1200, 1440x1080...)</li><li>Never replaces the settings screen, so new game settings keep showing</li><li>Made to be used with HUD Fit</li></ul>
     <div class="actions">
       <a class="btn" href="downloads/aspect_4x3_v2.0.zip" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download v2.0</a>
-      <button class="btn ghost" data-open="dlg-aspect43">Details</button>
+      <a class="btn ghost" href="4-3-video/">Details</a>
       <div class="meta">4 KB zip</div>
     </div>
   </div>
@@ -225,12 +231,12 @@ footer img { width:28px; height:28px; vertical-align:middle; margin-right:8px }
 <section class="mod" id="heroselect" style="--accent:#4fd1c5">
   <div class="media shotmedia"><img src="img/shots/heroselect_grid.jpg" alt="Hero Select Plus" loading="lazy"><div class="over"><b>Hero Select Plus</b><span>2 screenshots</span></div><button data-open="dlg-heroselect" aria-label="Hero Select Plus details"></button></div>
   <div class="info">
-    <h2>Hero Select Plus</h2>
+    <h2><a class="plain" href="hero-select-plus/">Hero Select Plus</a></h2>
     <div class="tag">Hero names, classes, search and filters on the hero select screen.</div>
     <ul><li>Names and colour-coded classes on every hero card</li><li>Search by name, class, tag, weapon type or difficulty</li><li>Class filters and a Beginner button</li><li>Hover details: role, difficulty and playstyle</li></ul>
     <div class="actions">
       <a class="btn" href="downloads/hero_select_plus_v1.0.zip" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download v1.0</a>
-      <button class="btn ghost" data-open="dlg-heroselect">Details &amp; screenshots</button>
+      <a class="btn ghost" href="hero-select-plus/">Details &amp; screenshots</a>
       <div class="meta">19 KB zip</div>
     </div>
   </div>
@@ -239,7 +245,7 @@ footer img { width:28px; height:28px; vertical-align:middle; margin-right:8px }
 <dialog id="dlg-heroselect" style="--accent:#4fd1c5" aria-label="Hero Select Plus">
   <div class="dlg-head"><h2>Hero Select Plus</h2><a class="btn" href="downloads/hero_select_plus_v1.0.zip" download>Download 1.0</a>
     <button class="close" aria-label="Close">&times;</button></div>
-  <div class="dlg-body"><figure class="shot"><a href="img/shots/heroselect_grid_big.jpg" target="_blank"><img src="img/shots/heroselect_grid.jpg" alt=""></a><figcaption>Class on every card, search box, class and Beginner filters</figcaption></figure><div class="thumbs"><button data-full="img/shots/heroselect_grid.jpg" data-big="img/shots/heroselect_grid_big.jpg" data-caption="Class on every card, search box, class and Beginner filters" aria-current="true"><img src="img/shots/heroselect_grid_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/heroselect_closeup.jpg" data-big="img/shots/heroselect_closeup_big.jpg" data-caption="Close-up: hero names and colour-coded classes" aria-current="false"><img src="img/shots/heroselect_closeup_t.jpg" alt="" loading="lazy"></button></div><div class="desc"><h2>Learn the heroes faster</h2>Hero Select Plus makes the hero select screen easier to read, especially if you are new to Deadlock.<h2>Features</h2><ul><li><b>Hero names</b> always visible on every card</li><li><b>Class on every card</b>, colour coded: Marksman, Assassin, Mystic, Brawler</li><li><b>Search box</b>: hero name, class, tag, weapon type or difficulty — several words narrow it down (e.g. <i>brawler tank</i>)</li><li><b>Class filter buttons</b> plus a <span class="GreenColor">Beginner</span> button for heroes the game recommends to new players</li><li><b>Hover details</b>: class, difficulty, weapon type, a one-line role and the playstyle summary</li></ul>All hero information is read from the game's own data when the mod is built.<h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> HUD Fit and 4:3 Video</li><li><span class="RedColor">Conflicts with</span> other mods that replace the hero select popup or hero card layouts</li><li>After a game update, if hero select looks wrong, <span class="RedColor">disable the mod</span> until an updated build is posted</li></ul></div></div>
+  <div class="dlg-body"><div class="gallery"><figure class="shot"><a href="img/shots/heroselect_grid_big.jpg" target="_blank"><img src="img/shots/heroselect_grid.jpg" alt="Class on every card, search box, class and Beginner filters"></a><figcaption>Class on every card, search box, class and Beginner filters</figcaption></figure><div class="thumbs"><button data-full="img/shots/heroselect_grid.jpg" data-big="img/shots/heroselect_grid_big.jpg" data-caption="Class on every card, search box, class and Beginner filters" aria-current="true"><img src="img/shots/heroselect_grid_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/heroselect_closeup.jpg" data-big="img/shots/heroselect_closeup_big.jpg" data-caption="Close-up: hero names and colour-coded classes" aria-current="false"><img src="img/shots/heroselect_closeup_t.jpg" alt="" loading="lazy"></button></div></div><div class="desc"><h2>Learn the heroes faster</h2>Hero Select Plus makes the hero select screen easier to read, especially if you are new to Deadlock.<h2>Features</h2><ul><li><b>Hero names</b> always visible on every card</li><li><b>Class on every card</b>, colour coded: Marksman, Assassin, Mystic, Brawler</li><li><b>Search box</b>: hero name, class, tag, weapon type or difficulty — several words narrow it down (e.g. <i>brawler tank</i>)</li><li><b>Class filter buttons</b> plus a <span class="GreenColor">Beginner</span> button for heroes the game recommends to new players</li><li><b>Hover details</b>: class, difficulty, weapon type, a one-line role and the playstyle summary</li></ul>All hero information is read from the game's own data when the mod is built.<h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> HUD Fit and 4:3 Video</li><li><span class="RedColor">Conflicts with</span> other mods that replace the hero select popup or hero card layouts</li><li>After a game update, if hero select looks wrong, <span class="RedColor">disable the mod</span> until an updated build is posted</li></ul></div></div>
 </dialog>
 
 
@@ -288,20 +294,23 @@ document.querySelectorAll("[data-open]").forEach(function (b) {
   b.addEventListener("click", function () {
     var d = document.getElementById(b.dataset.open);
     d.showModal();
-    var t = d.querySelectorAll(".thumbs button")[b.dataset.shot || 0];
+    var t = d.querySelectorAll(".thumbs button")[b.dataset.shot || 0];   // open at the clicked screenshot
     if (t) t.click();
   });
 });
 document.querySelectorAll("dialog").forEach(function (d) {
   d.addEventListener("click", function (e) { if (e.target === d) d.close(); });   // click outside closes
   d.querySelector(".close").addEventListener("click", function () { d.close(); });
-  d.querySelectorAll(".thumbs button").forEach(function (t) {
+});
+document.querySelectorAll(".gallery").forEach(function (g) {
+  g.querySelectorAll(".thumbs button").forEach(function (t) {
     t.addEventListener("click", function () {
-      var fig = d.querySelector(".shot");
+      var fig = g.querySelector(".shot");
       fig.querySelector("img").src = t.dataset.full;
+      fig.querySelector("img").alt = t.dataset.caption;
       fig.querySelector("a").href = t.dataset.big;
       fig.querySelector("figcaption").textContent = t.dataset.caption;
-      d.querySelectorAll(".thumbs button").forEach(function (o) { o.setAttribute("aria-current", o === t); });
+      g.querySelectorAll(".thumbs button").forEach(function (o) { o.setAttribute("aria-current", o === t); });
     });
   });
 });

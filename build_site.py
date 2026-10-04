@@ -26,7 +26,10 @@ import descriptions  # noqa: E402  (per-mod GameBanana texts, reused here)
 
 # key: thumbnail name in deadlock-branding/out; folder: entry in descriptions.MODS
 MODS = [
-    {"key": "hudfit", "folder": "HUD Fit", "name": "HUD Fit", "accent": "#ffc83c",
+    {"key": "hudfit", "folder": "HUD Fit", "name": "HUD Fit", "accent": "#ffc83c", "slug": "hud-fit",
+     "headline": "De-stretch, scale and move the Deadlock HUD",
+     "meta": "HUD Fit is a free Deadlock mod: de-stretch the HUD for 4:3 stretched, scale the UI and the shop, and "
+             "drag any of 23 HUD elements with a live in-game editor. Works at any resolution.",
      "tagline": "Move, resize and de-stretch every HUD element, live in game.",
      "points": ["De-stretch the HUD for 4:3 stretched (or 5:4, 16:10)",
                 "Scale the whole UI, or each element on its own, including the shop",
@@ -42,14 +45,20 @@ MODS = [
      "compare": ("20261003085728_1.jpg", "20261003085833_1.jpg"),
      # these were taken at 4:3 stretched: show them 16:9 wide, as they look on the monitor
      "stretch43": True},
-    {"key": "aspect43", "folder": "4-3 Video", "name": "4:3 Video", "accent": "#b48cff",
+    {"key": "aspect43", "folder": "4-3 Video", "name": "4:3 Video", "accent": "#b48cff", "slug": "4-3-video",
+     "headline": "A 4x3 aspect ratio option for Deadlock",
+     "meta": "4:3 Video is a free Deadlock mod that adds a 4x3 aspect ratio to Settings, Video, so you can pick 4:3 "
+             "resolutions like 1600x1200 or 1440x1080, without hiding newer game settings.",
      "tagline": "Adds a 4x3 aspect ratio button to the video settings, without hiding new settings.",
      "points": ["4x3 next to 16:9, 16:10 and 21:9 in Settings \u2192 Video",
                 "Lists the 4:3 resolutions your driver offers (1600x1200, 1440x1080...)",
                 "Never replaces the settings screen, so new game settings keep showing",
                 "Made to be used with HUD Fit"],
      "dist": os.path.join(HOME, "deadlock-4x3/dist/release"), "prefix": "aspect_4x3_v"},
-    {"key": "heroselect", "folder": "Hero Select Plus", "name": "Hero Select Plus", "accent": "#4fd1c5",
+    {"key": "heroselect", "folder": "Hero Select Plus", "name": "Hero Select Plus", "accent": "#4fd1c5", "slug": "hero-select-plus",
+     "headline": "Hero names, classes, search and filters for Deadlock",
+     "meta": "Hero Select Plus is a free Deadlock mod for the hero select screen: hero names and colour-coded classes on "
+             "every card, search, class filters and a Beginner filter for new players.",
      "tagline": "Hero names, classes, search and filters on the hero select screen.",
      "points": ["Names and colour-coded classes on every hero card",
                 "Search by name, class, tag, weapon type or difficulty",
@@ -106,6 +115,11 @@ PAGE = """<!doctype html>
 <meta property="og:title" content="Deadlock Mods: HUD Fit, 4:3 Video, Hero Select Plus">
 <meta property="og:description" content="De-stretch and scale the Deadlock HUD, add a 4x3 aspect ratio, find heroes faster. Free downloads.">
 <meta property="og:image" content="https://greeb.github.io/mods/img/hudfit.jpg">
+<meta property="og:url" content="https://greeb.github.io/mods/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Deadlock Mods">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://greeb.github.io/mods/">
 <link rel="icon" href="img/logo.png">
 <script type="application/ld+json">{faq_ld}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -165,6 +179,7 @@ nav ul a:hover {{ color:var(--text); background:var(--panel2) }}
 .strip img {{ width:100%; aspect-ratio:16/9; object-fit:cover; display:block; transition:transform .3s, filter .3s }}
 @media (hover:hover) {{ .strip img {{ filter:saturate(.6) brightness(.8) }} .strip button:hover img {{ filter:none; transform:scale(1.05) }} }}
 .strip button:hover {{ border-color:var(--accent) }}
+a.plain {{ color:inherit; text-decoration:none }} a.plain:hover {{ color:var(--accent) }}
 .info h2 {{ font-family:var(--head); font-size:38px; margin:0; line-height:1.1 }}
 .tag {{ color:var(--accent); font-weight:600; margin:6px 0 14px }}
 .info ul {{ list-style:none; padding:0; margin:0 0 22px }}
@@ -311,20 +326,23 @@ document.querySelectorAll("[data-open]").forEach(function (b) {{
   b.addEventListener("click", function () {{
     var d = document.getElementById(b.dataset.open);
     d.showModal();
-    var t = d.querySelectorAll(".thumbs button")[b.dataset.shot || 0];
+    var t = d.querySelectorAll(".thumbs button")[b.dataset.shot || 0];   // open at the clicked screenshot
     if (t) t.click();
   }});
 }});
 document.querySelectorAll("dialog").forEach(function (d) {{
   d.addEventListener("click", function (e) {{ if (e.target === d) d.close(); }});   // click outside closes
   d.querySelector(".close").addEventListener("click", function () {{ d.close(); }});
-  d.querySelectorAll(".thumbs button").forEach(function (t) {{
+}});
+document.querySelectorAll(".gallery").forEach(function (g) {{
+  g.querySelectorAll(".thumbs button").forEach(function (t) {{
     t.addEventListener("click", function () {{
-      var fig = d.querySelector(".shot");
+      var fig = g.querySelector(".shot");
       fig.querySelector("img").src = t.dataset.full;
+      fig.querySelector("img").alt = t.dataset.caption;
       fig.querySelector("a").href = t.dataset.big;
       fig.querySelector("figcaption").textContent = t.dataset.caption;
-      d.querySelectorAll(".thumbs button").forEach(function (o) {{ o.setAttribute("aria-current", o === t); }});
+      g.querySelectorAll(".thumbs button").forEach(function (o) {{ o.setAttribute("aria-current", o === t); }});
     }});
   }});
 }});
@@ -339,12 +357,12 @@ DOWNLOAD_ICON = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 CARD = """<section class="mod{flip}" id="{key}" style="--accent:{accent}">
   <div class="media{media_cls}"><img src="{media}" alt="{name}" loading="lazy">{media_over}<button data-open="dlg-{key}" aria-label="{name} details"></button></div>
   <div class="info">
-    <h2>{name}</h2>
+    <h2><a class="plain" href="{slug}/">{name}</a></h2>
     <div class="tag">{tagline}</div>
     <ul>{points}</ul>
     <div class="actions">
       <a class="btn" href="downloads/{zip}" download>""" + DOWNLOAD_ICON + """Download v{version}</a>
-      <button class="btn ghost" data-open="dlg-{key}">{more}</button>
+      <a class="btn ghost" href="{slug}/">{more}</a>
       <div class="meta">{size} KB zip</div>
     </div>
   </div>
@@ -446,11 +464,141 @@ def gallery_html(m):
     thumbs = "".join(
         '<button data-full="%s" data-big="%s" data-caption="%s" aria-current="%s"><img src="%s" alt="" loading="lazy"></button>'
         % (f, b, html.escape(c), "true" if i == 0 else "false", t) for i, (f, b, t, c) in enumerate(items))
-    return ('<figure class="shot"><a href="%s" target="_blank"><img src="%s" alt=""></a><figcaption>%s</figcaption></figure>'
-            '<div class="thumbs">%s</div>' % (big, full, html.escape(cap), thumbs))
+    return ('<div class="gallery"><figure class="shot"><a href="%s" target="_blank"><img src="%s" alt="%s"></a>'
+            '<figcaption>%s</figcaption></figure><div class="thumbs">%s</div></div>'
+            % (big, full, html.escape(cap), html.escape(cap), thumbs))
 
 
 SITE = "https://greeb.github.io/mods/"
+
+
+def block(start, end):
+    """A piece of PAGE (still a template), reused on the mod pages."""
+    i = PAGE.index(start)
+    return PAGE[i:PAGE.index(end, i) + len(end)]
+
+
+# Mod pages live in docs/<slug>/ and use <base href="../">, so every path is the same as on the home page.
+MOD_PAGE = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="../">
+<title>{title}</title>
+<meta name="description" content="{meta}">
+<link rel="canonical" href="{url}">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{meta}">
+<meta property="og:image" content="{image}">
+<meta property="og:url" content="{url}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Deadlock Mods">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/logo.png">
+<script type="application/ld+json">{ld}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+""" + block("<style>", "</style>").replace("</style>", """
+.crumbs {{ font-size:14px; color:var(--muted); margin-bottom:14px }}
+.crumbs a {{ color:var(--muted) }}
+.modhero {{ text-align:left; padding:48px 0 32px }}
+.modhero h1 {{ font-size:clamp(32px, 5vw, 50px) }}
+.modhero h1 small {{ display:block; font-size:.5em; color:var(--accent); margin-top:8px; letter-spacing:0 }}
+.modhero p {{ margin:0 0 22px; max-width:720px }}
+.modhero .meta {{ margin-top:10px }}
+.panel {{ background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:8px 26px 20px; margin:0 0 40px }}
+.pagegal {{ margin:0 0 40px }}
+.pagegal .shot img {{ max-height:none }}
+.others {{ padding:48px 0 0; border-top:1px solid var(--line) }}
+.others > h2 {{ font-family:var(--head); font-size:32px; margin:0 0 16px }}
+.ocards {{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px }}
+.ocard {{ display:block; background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; text-decoration:none; color:var(--text) }}
+.ocard:hover {{ border-color:var(--accent) }}
+.ocard img {{ width:100%; aspect-ratio:16/9; object-fit:cover; display:block }}
+.ocard div {{ padding:12px 16px 16px }}
+.ocard b {{ font-family:var(--head); font-size:22px }}
+.ocard span {{ display:block; color:var(--muted); font-size:14px }}
+</style>""") + """
+</head>
+<body>
+""" + block("<nav>", "</nav>") + """
+
+<main class="wrap" style="--accent:{accent}">
+<header class="hero modhero">
+  <div class="crumbs"><a href="./">Deadlock Mods</a> / {name}</div>
+  <h1>{name}<small>{headline}</small></h1>
+  <p>{tagline_long}</p>
+  <div class="actions">
+    <a class="btn" href="downloads/{zip}" download>""" + DOWNLOAD_ICON + """Download {name} v{version}</a>
+    <a class="btn ghost" href="#install">How to install</a>
+    <div class="meta">Version {version} &middot; {size} KB zip &middot; free &middot; updated {updated}</div>
+  </div>
+</header>
+{compare}
+{gallery}
+<section class="panel desc">{details}</section>
+""" + block('<section class="install"', "</section>") + """
+
+<section class="others">
+  <h2>More Deadlock mods</h2>
+  <div class="ocards">{others}</div>
+</section>
+</main>
+
+""" + PAGE[PAGE.index("<footer>"):]
+
+
+def nav_links():
+    return "\n    ".join('<li class="opt"><a href="%s/">%s</a></li>' % (m["slug"], html.escape(m["name"])) for m in MODS)
+
+
+def mod_ld(m, version, zipname, url, image):
+    import json
+    app = {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": m["name"],
+           "description": m["meta"], "url": url, "image": image, "softwareVersion": version,
+           "downloadUrl": SITE + "downloads/" + zipname, "applicationCategory": "GameApplication",
+           "applicationSubCategory": "Game mod", "operatingSystem": "Windows",
+           "isAccessibleForFree": True, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+           "featureList": m["points"]}
+    crumbs = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Deadlock Mods", "item": SITE},
+        {"@type": "ListItem", "position": 2, "name": m["name"], "item": url}]}
+    return json.dumps([app, crumbs]).replace("</", "<\\/")
+
+
+def write_mod_page(m, version, zipname, size, updated):
+    url = SITE + m["slug"] + "/"
+    image = SITE + (shot_items(m)[0][0] if m.get("shots") else "img/%s.jpg" % m["key"])
+    others = "".join(
+        '<a class="ocard" href="%s/" style="--accent:%s"><img src="%s" alt="%s" loading="lazy"><div><b>%s</b>'
+        '<span>%s</span></div></a>'
+        % (o["slug"], o["accent"], shot_items(o)[0][0] if o.get("shots") else "img/%s.jpg" % o["key"],
+           html.escape(o["name"]), html.escape(o["name"]), html.escape(o["tagline"])) for o in MODS if o is not m)
+    gal = gallery_html(m)
+    page = MOD_PAGE.format(
+        title=html.escape("%s: %s | Deadlock mod" % (m["name"], m["headline"])), meta=html.escape(m["meta"]),
+        url=url, image=image, ld=mod_ld(m, version, zipname, url, image), accent=m["accent"],
+        name=html.escape(m["name"]), headline=html.escape(m["headline"]), tagline_long=html.escape(m["meta"]),
+        zip=zipname, version=version, size=size, updated=updated,
+        compare=COMPARE.format(accent=m["accent"],
+                               before="img/shots/%s.jpg" % shot_base(m, m["compare"][0]),
+                               after="img/shots/%s.jpg" % shot_base(m, m["compare"][1])) if m.get("compare") else "",
+        gallery='<section class="pagegal">%s</section>' % gal if gal else "",
+        details=details_html(m["folder"]), others=others, navlinks=nav_links(), repo=REPO)
+    d = os.path.join(DOCS, m["slug"])
+    os.makedirs(d, exist_ok=True)
+    with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
+        f.write(page)
+    return url
+
+
+def write_sitemap(urls, updated):
+    body = "".join("  <url><loc>%s</loc><lastmod>%s</lastmod></url>\n" % (u, updated) for u in urls)
+    with open(os.path.join(DOCS, "sitemap.xml"), "w", encoding="utf-8") as f:
+        f.write('<?xml version="1.0" encoding="UTF-8"?>\n'
+                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + body + "</urlset>\n")
 
 
 def badge_text(t):
@@ -493,7 +641,7 @@ def main():
         cards.append(CARD.format(flip=" flip" if n % 2 else "", accent=m["accent"], key=m["key"], name=html.escape(m["name"]),
                                  tagline=html.escape(m["tagline"]), version=version, size=size, points=points,
                                  zip=zipname, details=details_html(m["folder"]), gallery=gallery_html(m),
-                                 more="Details &amp; screenshots" if m.get("shots") else "Details",
+                                 slug=m["slug"], more="Details &amp; screenshots" if m.get("shots") else "Details",
                                  media=shot_items(m)[0][0] if m.get("shots") else "img/%s.jpg" % m["key"],
                                  media_cls=" shotmedia" if m.get("shots") else "",
                                  media_over=('<div class="over"><b>%s</b><span>%d screenshots</span></div>'
@@ -509,11 +657,20 @@ def main():
         if f not in keep:
             os.remove(os.path.join(DOCS, "downloads", f))
     with open(os.path.join(DOCS, "index.html"), "w", encoding="utf-8") as f:
-        navlinks = "\n    ".join('<li class="opt"><a href="#%s">%s</a></li>' % (m["key"], html.escape(m["name"])) for m in MODS)
+        navlinks = nav_links()
         chips = "".join('<a href="#%s" style="--c:%s"><i></i>%s</a>' % (m["key"], m["accent"], html.escape(m["name"])) for m in MODS)
         f.write(PAGE.format(cards="\n".join(cards), repo=REPO, navlinks=navlinks, chips=chips,
                             faq=faq_html(), faq_ld=faq_ld()))
     open(os.path.join(DOCS, ".nojekyll"), "w").close()
+    import datetime
+    updated = datetime.date.today().isoformat()
+    urls = [SITE]
+    for m in MODS:
+        version, zipname = versions[m["key"]]
+        size = os.path.getsize(os.path.join(DOCS, "downloads", zipname)) // 1024 + 1
+        built = datetime.date.fromtimestamp(os.path.getmtime(os.path.join(m["dist"], zipname))).isoformat()
+        urls.append(write_mod_page(m, version, zipname, size, built))
+    write_sitemap(urls, updated)
     update_readme(versions)
     used = {os.path.basename(p) for m in MODS for it in shot_items(m) for p in it[:3]}
     sd = os.path.join(DOCS, "img", "shots")

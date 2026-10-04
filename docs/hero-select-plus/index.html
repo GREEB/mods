@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="../">
+<title>Hero Select Plus: Hero names, classes, search and filters for Deadlock | Deadlock mod</title>
+<meta name="description" content="Hero Select Plus is a free Deadlock mod for the hero select screen: hero names and colour-coded classes on every card, search, class filters and a Beginner filter for new players.">
+<link rel="canonical" href="https://greeb.github.io/mods/hero-select-plus/">
+<meta property="og:title" content="Hero Select Plus: Hero names, classes, search and filters for Deadlock | Deadlock mod">
+<meta property="og:description" content="Hero Select Plus is a free Deadlock mod for the hero select screen: hero names and colour-coded classes on every card, search, class filters and a Beginner filter for new players.">
+<meta property="og:image" content="https://greeb.github.io/mods/img/shots/heroselect_grid.jpg">
+<meta property="og:url" content="https://greeb.github.io/mods/hero-select-plus/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Deadlock Mods">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/logo.png">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Hero Select Plus", "description": "Hero Select Plus is a free Deadlock mod for the hero select screen: hero names and colour-coded classes on every card, search, class filters and a Beginner filter for new players.", "url": "https://greeb.github.io/mods/hero-select-plus/", "image": "https://greeb.github.io/mods/img/shots/heroselect_grid.jpg", "softwareVersion": "1.0", "downloadUrl": "https://greeb.github.io/mods/downloads/hero_select_plus_v1.0.zip", "applicationCategory": "GameApplication", "applicationSubCategory": "Game mod", "operatingSystem": "Windows", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "featureList": ["Names and colour-coded classes on every hero card", "Search by name, class, tag, weapon type or difficulty", "Class filters and a Beginner button", "Hover details: role, difficulty and playstyle"]}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Deadlock Mods", "item": "https://greeb.github.io/mods/"}, {"@type": "ListItem", "position": 2, "name": "Hero Select Plus", "item": "https://greeb.github.io/mods/hero-select-plus/"}]}]</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#0e0c0a; --panel:#17130f; --panel2:#1f1a14; --line:#2f271f; --gold:#d6ae62; --text:#f1e9db; --muted:#a3967f;
+        --tomato:#d4573a; --head:"Rajdhani","Bahnschrift",system-ui,sans-serif }
+* { box-sizing:border-box }
+html { scroll-behavior:smooth; scroll-padding-top:72px }
+body { margin:0; background:var(--bg); color:var(--text); font:16px/1.65 "Inter","Segoe UI",system-ui,sans-serif }
+a { color:var(--gold) }
+.wrap { max-width:1120px; margin:0 auto; padding:0 20px }
+
+/* nav */
+nav { position:sticky; top:0; z-index:10; background:#0e0c0acc; backdrop-filter:blur(10px); border-bottom:1px solid var(--line) }
+nav .wrap { display:flex; align-items:center; gap:24px; height:60px }
+.brand { display:flex; align-items:center; text-decoration:none }
+.brand img { width:40px; height:40px; display:block; transition:transform .2s }
+.brand:hover img { transform:rotate(-12deg) scale(1.06) }
+nav ul { display:flex; gap:4px; list-style:none; margin:0 0 0 auto; padding:0 }
+nav ul a { display:block; padding:6px 12px; border-radius:8px; color:var(--muted); text-decoration:none; font-weight:500; font-size:15px }
+nav ul a:hover { color:var(--text); background:var(--panel2) }
+@media (max-width:720px) { nav ul .opt { display:none } }
+
+/* hero */
+.hero { padding:72px 0 40px; text-align:center;
+         background:radial-gradient(ellipse 60% 70% at 50% 0%, #3a2a1a55, transparent 70%) }
+.hero h1 { font-family:var(--head); font-weight:700; font-size:clamp(34px, 6vw, 58px); line-height:1.05; margin:0 0 14px; letter-spacing:.5px }
+.hero h1 em { font-style:normal; color:var(--gold) }
+.hero p { max-width:620px; margin:0 auto; color:var(--muted); font-size:18px }
+.chips { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:24px }
+.chips a { padding:7px 14px; border:1px solid var(--line); border-radius:99px; text-decoration:none; color:var(--text);
+           font-size:14px; background:var(--panel) }
+.chips a:hover { border-color:var(--c) }
+.chips a i { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--c); margin-right:8px }
+
+/* mods */
+.mod { display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:center; padding:48px 0; border-top:1px solid var(--line) }
+.mod.flip .media { order:2 }
+.media { position:relative; border-radius:16px; overflow:hidden; border:1px solid var(--line); box-shadow:0 20px 60px #0008 }
+.media img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; background:#000 }
+.media button { position:absolute; inset:0; border:0; background:none; cursor:zoom-in }
+/* screenshot as the mod's picture: dimmed with the name over it, full colour on hover */
+.shotmedia img { transition:filter .35s, transform .5s }
+.shotmedia .over { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:20px 22px;
+                    background:linear-gradient(to top, #0e0c0ae6 0%, #0e0c0a66 45%, transparent 75%); transition:opacity .35s; pointer-events:none }
+.shotmedia .over b { font-family:var(--head); font-size:34px; line-height:1; color:var(--accent); text-shadow:0 2px 12px #000 }
+.shotmedia .over span { font-size:13px; color:var(--text); opacity:.8; margin-top:6px }
+@media (hover:hover) {
+  .shotmedia img { filter:grayscale(.7) brightness(.6) sepia(.25) }
+  .shotmedia:hover img { filter:none; transform:scale(1.03) }
+  .shotmedia:hover .over { opacity:0 }
+}
+.strip { grid-column:1 / -1; order:3; display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:10px; margin-top:4px }
+.strip button { padding:0; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#000; cursor:zoom-in }
+.strip img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; transition:transform .3s, filter .3s }
+@media (hover:hover) { .strip img { filter:saturate(.6) brightness(.8) } .strip button:hover img { filter:none; transform:scale(1.05) } }
+.strip button:hover { border-color:var(--accent) }
+a.plain { color:inherit; text-decoration:none } a.plain:hover { color:var(--accent) }
+.info h2 { font-family:var(--head); font-size:38px; margin:0; line-height:1.1 }
+.tag { color:var(--accent); font-weight:600; margin:6px 0 14px }
+.info ul { list-style:none; padding:0; margin:0 0 22px }
+.info li { position:relative; padding-left:22px; margin:6px 0; color:#d9cdb8 }
+.info li::before { content:""; position:absolute; left:2px; top:.62em; width:8px; height:8px; border-radius:2px;
+                    background:var(--accent); transform:rotate(45deg) }
+.actions { display:flex; flex-wrap:wrap; gap:10px; align-items:center }
+.btn { display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:10px; font-weight:600; text-decoration:none;
+       color:#14110e; background:var(--accent); border:0; font-size:15px; font-family:inherit; cursor:pointer }
+.btn:hover { filter:brightness(1.1) }
+.btn svg { width:18px; height:18px }
+.ghost { background:none; color:var(--text); border:1px solid var(--line) }
+.ghost:hover { border-color:var(--accent); filter:none }
+.meta { font-size:13px; color:var(--muted); width:100% }
+@media (max-width:860px) { .mod { grid-template-columns:1fr; gap:22px; padding:36px 0 } .mod.flip .media { order:0 } }
+
+/* before / after slider */
+.compare { padding:0 0 48px }
+.compare h3 { font-family:var(--head); font-size:26px; margin:0 0 4px }
+.compare p { color:var(--muted); margin:0 0 16px }
+.ba { position:relative; border-radius:16px; overflow:hidden; border:1px solid var(--line); box-shadow:0 20px 60px #0008;
+       aspect-ratio:16/9; max-width:1080px; margin:0 auto; user-select:none; --pos:50% }
+.ba img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block }
+.ba .after { clip-path:inset(0 0 0 var(--pos)) }
+.ba .bar { position:absolute; top:0; bottom:0; left:var(--pos); width:3px; margin-left:-1.5px; background:var(--gold); pointer-events:none }
+.ba .bar::after { content:"\2194"; position:absolute; top:50%; left:50%; width:40px; height:40px; margin:-20px 0 0 -20px;
+                  border-radius:50%; background:var(--gold); color:#14110e; display:grid; place-items:center; font-weight:700; font-size:20px }
+.ba input { position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:ew-resize; margin:0 }
+.ba .lbl { position:absolute; top:12px; padding:4px 12px; border-radius:99px; background:#0e0c0af0; border:1px solid var(--line); z-index:1; font-size:13px; font-weight:600; pointer-events:none }
+.ba .lbl.l { left:12px } .ba .lbl.r { right:12px; color:var(--gold) }
+
+/* faq */
+.faq { padding:56px 0 8px; border-top:1px solid var(--line) }
+.faq > h2 { font-family:var(--head); font-size:38px; margin:0 0 18px }
+.faq details { background:var(--panel); border:1px solid var(--line); border-radius:12px; margin:0 0 10px; padding:0 20px }
+.faq details[open] { border-color:#4a3c2c }
+.faq summary { cursor:pointer; padding:16px 0; font-weight:600; list-style:none; display:flex; justify-content:space-between; gap:16px }
+.faq summary::-webkit-details-marker { display:none }
+.faq summary::after { content:"+"; color:var(--gold); font-size:22px; line-height:1 }
+.faq details[open] summary::after { content:"\2212" }
+.faq details p { margin:0 0 16px; color:#d9cdb8 }
+
+/* dialog */
+dialog { width:min(1000px, calc(100vw - 32px)); max-height:calc(100vh - 32px); padding:0; border:1px solid var(--line);
+          border-radius:16px; background:var(--panel); color:var(--text) }
+dialog::backdrop { background:#000c; backdrop-filter:blur(3px) }
+.dlg-head { position:sticky; top:0; z-index:1; display:flex; align-items:center; gap:12px; padding:12px 16px;
+             background:var(--panel); border-bottom:1px solid var(--line) }
+.dlg-head h2 { margin:0; font-family:var(--head); font-size:26px; flex:1 }
+.dlg-head .btn { padding:8px 14px }
+.close { background:none; border:0; color:var(--muted); font-size:28px; line-height:1; cursor:pointer; padding:0 4px }
+.dlg-body { padding:16px }
+.shot { margin:0 }
+.shot img { width:100%; max-height:62vh; object-fit:contain; border-radius:10px; display:block; background:#000; cursor:zoom-in }
+.shot figcaption { color:var(--muted); font-size:14px; margin:6px 0 10px }
+.thumbs { display:flex; gap:8px; overflow-x:auto; padding-bottom:6px }
+.thumbs button { flex:0 0 auto; padding:0; border:2px solid transparent; border-radius:7px; background:none; cursor:pointer }
+.thumbs button[aria-current="true"] { border-color:var(--accent) }
+.thumbs img { width:120px; height:72px; object-fit:cover; border-radius:5px; display:block }
+.desc { font-size:15px; color:#d8ccb6; margin-top:8px }
+.desc h2 { font-size:19px; margin:18px 0 4px; color:var(--text) }
+.desc h3 { font-size:16px; margin:14px 0 4px; color:var(--text) }
+.desc ul { padding-left:20px; margin:4px 0 }
+.desc hr { border:0; border-top:1px solid var(--line) }
+.GreenColor { color:#8fd46a } .RedColor { color:#ff7a68 } .OrangeColor { color:#ffad5a }
+
+/* install */
+.install { padding:56px 0 24px; border-top:1px solid var(--line) }
+.install > h2 { font-family:var(--head); font-size:38px; margin:0 0 6px }
+.install > p { color:var(--muted); margin:0 0 24px }
+.steps { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px }
+.step { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px 22px }
+.step h3 { margin:0 0 8px; font-size:18px }
+.step h3 small { font-size:12px; font-weight:600; color:#14110e; background:var(--gold); padding:2px 8px; border-radius:99px;
+                  margin-left:8px; vertical-align:middle }
+.step ol { padding-left:20px; margin:0; color:#d9cdb8; font-size:15px }
+.step li { margin:4px 0 }
+code { background:#0a0907; border:1px solid var(--line); padding:1px 6px; border-radius:5px; font-size:13px }
+.note { margin-top:16px; color:var(--muted); font-size:15px }
+footer { border-top:1px solid var(--line); margin-top:40px }
+footer .wrap { display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; padding:22px 20px 36px;
+               color:var(--muted); font-size:14px }
+footer img { width:28px; height:28px; vertical-align:middle; margin-right:8px }
+
+.crumbs { font-size:14px; color:var(--muted); margin-bottom:14px }
+.crumbs a { color:var(--muted) }
+.modhero { text-align:left; padding:48px 0 32px }
+.modhero h1 { font-size:clamp(32px, 5vw, 50px) }
+.modhero h1 small { display:block; font-size:.5em; color:var(--accent); margin-top:8px; letter-spacing:0 }
+.modhero p { margin:0 0 22px; max-width:720px }
+.modhero .meta { margin-top:10px }
+.panel { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:8px 26px 20px; margin:0 0 40px }
+.pagegal { margin:0 0 40px }
+.pagegal .shot img { max-height:none }
+.others { padding:48px 0 0; border-top:1px solid var(--line) }
+.others > h2 { font-family:var(--head); font-size:32px; margin:0 0 16px }
+.ocards { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px }
+.ocard { display:block; background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; text-decoration:none; color:var(--text) }
+.ocard:hover { border-color:var(--accent) }
+.ocard img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block }
+.ocard div { padding:12px 16px 16px }
+.ocard b { font-family:var(--head); font-size:22px }
+.ocard span { display:block; color:var(--muted); font-size:14px }
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="#top" aria-label="Home"><img src="img/logo.png" alt="Logo"></a>
+  <ul>
+    <li class="opt"><a href="hud-fit/">HUD Fit</a></li>
+    <li class="opt"><a href="4-3-video/">4:3 Video</a></li>
+    <li class="opt"><a href="hero-select-plus/">Hero Select Plus</a></li>
+    <li><a href="#install">Install</a></li>
+    <li class="opt"><a href="#faq">FAQ</a></li>
+    <li class="opt"><a href="https://github.com/GREEB/mods/issues">Report a bug</a></li>
+  </ul>
+</div></nav>
+
+<main class="wrap" style="--accent:#4fd1c5">
+<header class="hero modhero">
+  <div class="crumbs"><a href="./">Deadlock Mods</a> / Hero Select Plus</div>
+  <h1>Hero Select Plus<small>Hero names, classes, search and filters for Deadlock</small></h1>
+  <p>Hero Select Plus is a free Deadlock mod for the hero select screen: hero names and colour-coded classes on every card, search, class filters and a Beginner filter for new players.</p>
+  <div class="actions">
+    <a class="btn" href="downloads/hero_select_plus_v1.0.zip" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download Hero Select Plus v1.0</a>
+    <a class="btn ghost" href="#install">How to install</a>
+    <div class="meta">Version 1.0 &middot; 19 KB zip &middot; free &middot; updated 2026-10-03</div>
+  </div>
+</header>
+
+<section class="pagegal"><div class="gallery"><figure class="shot"><a href="img/shots/heroselect_grid_big.jpg" target="_blank"><img src="img/shots/heroselect_grid.jpg" alt="Class on every card, search box, class and Beginner filters"></a><figcaption>Class on every card, search box, class and Beginner filters</figcaption></figure><div class="thumbs"><button data-full="img/shots/heroselect_grid.jpg" data-big="img/shots/heroselect_grid_big.jpg" data-caption="Class on every card, search box, class and Beginner filters" aria-current="true"><img src="img/shots/heroselect_grid_t.jpg" alt="" loading="lazy"></button><button data-full="img/shots/heroselect_closeup.jpg" data-big="img/shots/heroselect_closeup_big.jpg" data-caption="Close-up: hero names and colour-coded classes" aria-current="false"><img src="img/shots/heroselect_closeup_t.jpg" alt="" loading="lazy"></button></div></div></section>
+<section class="panel desc"><h2>Learn the heroes faster</h2>Hero Select Plus makes the hero select screen easier to read, especially if you are new to Deadlock.<h2>Features</h2><ul><li><b>Hero names</b> always visible on every card</li><li><b>Class on every card</b>, colour coded: Marksman, Assassin, Mystic, Brawler</li><li><b>Search box</b>: hero name, class, tag, weapon type or difficulty — several words narrow it down (e.g. <i>brawler tank</i>)</li><li><b>Class filter buttons</b> plus a <span class="GreenColor">Beginner</span> button for heroes the game recommends to new players</li><li><b>Hover details</b>: class, difficulty, weapon type, a one-line role and the playstyle summary</li></ul>All hero information is read from the game's own data when the mod is built.<h2>Install</h2><ul><li>Install with <b>Deadlock Mod Manager</b>, or copy the VPK into <i>game/citadel/addons</i> as the next free <i>pakNN_dir.vpk</i></li></ul><h2>Compatibility</h2><ul><li><span class="GreenColor">Works with</span> HUD Fit and 4:3 Video</li><li><span class="RedColor">Conflicts with</span> other mods that replace the hero select popup or hero card layouts</li><li>After a game update, if hero select looks wrong, <span class="RedColor">disable the mod</span> until an updated build is posted</li></ul></section>
+<section class="install" id="install">
+  <h2>Install</h2>
+  <p>Download a mod's <code>.zip</code> above, then add it in your mod manager or by hand.</p>
+  <div class="steps">
+    <div class="step"><h3>Deadlock Mod Manager <small>easiest</small></h3><ol>
+      <li>Open <a href="https://deadlockmods.app/">Deadlock Mod Manager</a> and choose <b>Add Local Mod</b>.</li>
+      <li>Drop the zip in (don't unzip it), name it, add it, and turn it on.</li>
+    </ol></div>
+    <div class="step"><h3>Grimoire</h3><ol>
+      <li>In <a href="https://grimoiremods.com/">Grimoire</a>, open <b>Installed</b> and choose <b>Import Local Mods</b>.</li>
+      <li>Pick the zip and turn the mod on.</li>
+    </ol></div>
+    <div class="step"><h3>By hand</h3><ol>
+      <li>Unzip it. It contains <code>pak01_dir.vpk</code>.</li>
+      <li>Copy that file to <code>Deadlock/game/citadel/addons</code> and rename it to the next free number
+          (<code>pak02_dir.vpk</code>, ...). The game stops loading at the first missing number.</li>
+      <li>Mods must be enabled in <code>gameinfo.gi</code>. A mod manager does this for you.</li>
+    </ol></div>
+  </div>
+  <p class="note"><b>Updating:</b> remove the old version in your mod manager, then add the new zip from this page.</p>
+</section>
+
+<section class="others">
+  <h2>More Deadlock mods</h2>
+  <div class="ocards"><a class="ocard" href="hud-fit/" style="--accent:#ffc83c"><img src="img/shots/hudfit_20261003084800_1.jpg" alt="HUD Fit" loading="lazy"><div><b>HUD Fit</b><span>Move, resize and de-stretch every HUD element, live in game.</span></div></a><a class="ocard" href="4-3-video/" style="--accent:#b48cff"><img src="img/aspect43.jpg" alt="4:3 Video" loading="lazy"><div><b>4:3 Video</b><span>Adds a 4x3 aspect ratio button to the video settings, without hiding new settings.</span></div></a></div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <span><img src="img/logo.png" alt="">Not affiliated with Valve.</span>
+  <span>Questions or bugs: <a href="https://github.com/GREEB/mods/issues">open an issue on GitHub</a></span>
+</div></footer>
+<script>
+document.querySelectorAll(".ba").forEach(function (b) {
+  var r = b.querySelector("input");
+  r.addEventListener("input", function () { b.style.setProperty("--pos", r.value + "%"); });
+});
+document.querySelectorAll("[data-open]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var d = document.getElementById(b.dataset.open);
+    d.showModal();
+    var t = d.querySelectorAll(".thumbs button")[b.dataset.shot || 0];   // open at the clicked screenshot
+    if (t) t.click();
+  });
+});
+document.querySelectorAll("dialog").forEach(function (d) {
+  d.addEventListener("click", function (e) { if (e.target === d) d.close(); });   // click outside closes
+  d.querySelector(".close").addEventListener("click", function () { d.close(); });
+});
+document.querySelectorAll(".gallery").forEach(function (g) {
+  g.querySelectorAll(".thumbs button").forEach(function (t) {
+    t.addEventListener("click", function () {
+      var fig = g.querySelector(".shot");
+      fig.querySelector("img").src = t.dataset.full;
+      fig.querySelector("img").alt = t.dataset.caption;
+      fig.querySelector("a").href = t.dataset.big;
+      fig.querySelector("figcaption").textContent = t.dataset.caption;
+      g.querySelectorAll(".thumbs button").forEach(function (o) { o.setAttribute("aria-current", o === t); });
+    });
+  });
+});
+</script>
+</body>
+</html>
