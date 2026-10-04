@@ -46,17 +46,17 @@ of the way.
 
 | | |
 |---|---|
-| 📐 **De-stretch for 4:3 stretched** | Fix chosen elements or the whole HUD, with presets for 4:3, 5:4 and 16:10 |
-| 🔍 **Scale the UI** | Make the whole HUD bigger or smaller, and every element stays at its screen edge. Each element can also be resized on its own |
-| 🛒 **Scale the shop (buy menu)** | Resize and de-stretch the buy menu so it fits a 4:3 screen or a smaller UI |
-| ✋ **Move 23 HUD elements** | Health bar, abilities, items & souls, weapon / spirit / vitality, minimap, top bar, crosshair & ammo, kill feed, chat, buy menu, prompts, buffs, aura effects, hints, announcements, respawn timer, damage meter, movement speed and more |
-| 🧲 **Snapping and centering** | Snap to screen edges, the centre and other elements. Center buttons put the crosshair exactly in the middle. W A S D nudges an element (Shift = 10 px) and + / − resizes it |
-| 🗂️ **Layers** | Show or hide each element, lock it, or reset it with one click |
-| ❤️ **Health bar fix** | The stock health bar disappears at 4:3; HUD Fit puts it back |
-| 🧪 **Test tab** | One-click sandbox situations so you can arrange the real UI: damage, low health, death / respawn timer, level up, souls, buffs, enemy bot, trooper wave, DPS meter |
-| 💾 **Layouts** | Default, Clean, and up to 20 named layouts. Export or import a layout code to share it |
-| 🎨 **Filters** | Monochrome, Sepia, Neon, Ice, Ghost, Focus and Muted, each with a strength slider |
-| 🔒 **Saved on your PC** | Your layout comes back after a restart, and nothing is uploaded |
+| **De-stretch for 4:3 stretched** | Fix chosen elements or the whole HUD, with presets for 4:3, 5:4 and 16:10 |
+| **Scale the UI** | Make the whole HUD bigger or smaller, and every element stays at its screen edge. Each element can also be resized on its own |
+| **Scale the shop (buy menu)** | Resize and de-stretch the buy menu so it fits a 4:3 screen or a smaller UI |
+| **Move 23 HUD elements** | Health bar, abilities, items & souls, weapon / spirit / vitality, minimap, top bar, crosshair & ammo, kill feed, chat, buy menu, prompts, buffs, aura effects, hints, announcements, respawn timer, damage meter, movement speed and more |
+| **Snapping and centering** | Snap to screen edges, the centre and other elements. Center buttons put the crosshair exactly in the middle. W A S D nudges an element (Shift = 10 px) and + / − resizes it |
+| **Layers** | Show or hide each element, lock it, or reset it with one click |
+| **Health bar fix** | The stock health bar disappears at 4:3; HUD Fit puts it back |
+| **Test tab** | One-click sandbox situations so you can arrange the real UI: damage, low health, death / respawn timer, level up, souls, buffs, enemy bot, trooper wave, DPS meter |
+| **Layouts** | Default, Clean, and up to 20 named layouts. Export or import a layout code to share it |
+| **Filters** | Monochrome, Sepia, Neon, Ice, Ghost, Focus and Muted, each with a strength slider |
+| **Saved on your PC** | Your layout comes back after a restart, and nothing is uploaded |
 
 **Open it:** press Esc in a match, then choose **HUD Fit** (under Settings). Explore NYC or a sandbox /
 Hero Testing match is the best place to use it.
@@ -89,12 +89,12 @@ Pick it and the resolution list shows the 4:3 resolutions your graphics driver o
 
 <!--dl:aspect43-->[![Download 4:3 Video v2.0](https://img.shields.io/badge/Download-4%3A3%20Video%20v2.0-b48cff?style=for-the-badge)](https://greeb.github.io/mods/downloads/aspect_4x3_v2.0.zip)<!--/dl-->
 
-- ✅ **Never hides new settings.** Older 4:3 mods ship a whole copy of the settings screen, which hides
+- **Never hides new settings.** Older 4:3 mods ship a whole copy of the settings screen, which hides
   every setting added since. This one only adds the button.
-- 🔁 **Remembers your choice:** 4x3 stays selected when you reopen the settings.
-- 🖥️ **Want 1920x1440?** Add it as a custom resolution first, in AMD Adrenalin, the NVIDIA Control
+- **Remembers your choice:** 4x3 stays selected when you reopen the settings.
+- **Want 1920x1440?** Add it as a custom resolution first, in AMD Adrenalin, the NVIDIA Control
   Panel or CRU, and it shows up in the list.
-- 🤝 **Made to be used with HUD Fit**, which de-stretches the HUD when you play 4:3 stretched.
+- **Made to be used with HUD Fit**, which de-stretches the HUD when you play 4:3 stretched.
 
 ---
 
@@ -108,11 +108,11 @@ Hero Select Plus makes the hero select screen easier to read, especially for new
 
 <img src="docs/img/shots/heroselect_grid.jpg" alt="Hero Select Plus: classes, search and filters on the Deadlock hero select screen">
 
-- 🏷️ **Names and classes** on every hero card, colour coded: Marksman, Assassin, Mystic, Brawler.
-- 🔎 **Search** by name, class, tag, weapon type or difficulty. Several words narrow it down, for
+- **Names and classes** on every hero card, colour coded: Marksman, Assassin, Mystic, Brawler.
+- **Search** by name, class, tag, weapon type or difficulty. Several words narrow it down, for
   example "brawler tank".
-- 🎚️ **Class filters**, plus a **Beginner** button for the heroes the game recommends to new players.
-- 💬 **Hover details:** class, difficulty, weapon type, a one-line role and a playstyle summary.
+- **Class filters**, plus a **Beginner** button for the heroes the game recommends to new players.
+- **Hover details:** class, difficulty, weapon type, a one-line role and a playstyle summary.
 
 <details>
 <summary><b>📸 Close-up</b></summary>
