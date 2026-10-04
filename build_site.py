@@ -38,7 +38,8 @@ MODS = [
                ("20261003085833_1.jpg", "After: de-stretched, resized and a filter, with HUD Fit"),
                ("20261003082723_1.jpg", "The editor opens over the live HUD (Esc, then HUD Fit)"),
                ("20261003085741_1.jpg", "Layers: show, hide, lock or reset every element"),
-               ("20261003084800_1.jpg", "Show all outlines: every element you can move and resize")]},
+               ("20261003084800_1.jpg", "Show all outlines: every element you can move and resize")],
+     "compare": (1, 2)},
     {"key": "aspect43", "folder": "4-3 Video", "name": "4:3 Video", "accent": "#b48cff",
      "tagline": "Adds a 4x3 aspect ratio button to the video settings, without hiding new settings.",
      "points": ["4x3 next to 16:9, 16:10 and 21:9 in Settings \u2192 Video",
@@ -97,6 +98,7 @@ PAGE = """<!doctype html>
 <meta property="og:description" content="De-stretch and scale the Deadlock HUD, add a 4x3 aspect ratio, find heroes faster. Free downloads.">
 <meta property="og:image" content="https://greeb.github.io/mods/img/hudfit.jpg">
 <link rel="icon" href="img/logo.png">
+<script type="application/ld+json">{faq_ld}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -154,6 +156,32 @@ nav ul a:hover {{ color:var(--text); background:var(--panel2) }}
 .meta {{ font-size:13px; color:var(--muted); width:100% }}
 @media (max-width:860px) {{ .mod {{ grid-template-columns:1fr; gap:22px; padding:36px 0 }} .mod:nth-of-type(even) .media {{ order:0 }} }}
 
+/* before / after slider */
+.compare {{ padding:0 0 48px }}
+.compare h3 {{ font-family:var(--head); font-size:26px; margin:0 0 4px }}
+.compare p {{ color:var(--muted); margin:0 0 16px }}
+.ba {{ position:relative; border-radius:16px; overflow:hidden; border:1px solid var(--line); box-shadow:0 20px 60px #0008;
+       aspect-ratio:4/3; max-width:900px; margin:0 auto; user-select:none; --pos:50% }}
+.ba img {{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block }}
+.ba .after {{ clip-path:inset(0 0 0 var(--pos)) }}
+.ba .bar {{ position:absolute; top:0; bottom:0; left:var(--pos); width:3px; margin-left:-1.5px; background:var(--gold); pointer-events:none }}
+.ba .bar::after {{ content:"\\2194"; position:absolute; top:50%; left:50%; width:40px; height:40px; margin:-20px 0 0 -20px;
+                  border-radius:50%; background:var(--gold); color:#14110e; display:grid; place-items:center; font-weight:700; font-size:20px }}
+.ba input {{ position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:ew-resize; margin:0 }}
+.ba .lbl {{ position:absolute; top:12px; padding:4px 12px; border-radius:99px; background:#0e0c0af0; border:1px solid var(--line); z-index:1; font-size:13px; font-weight:600; pointer-events:none }}
+.ba .lbl.l {{ left:12px }} .ba .lbl.r {{ right:12px; color:var(--gold) }}
+
+/* faq */
+.faq {{ padding:56px 0 8px; border-top:1px solid var(--line) }}
+.faq > h2 {{ font-family:var(--head); font-size:38px; margin:0 0 18px }}
+.faq details {{ background:var(--panel); border:1px solid var(--line); border-radius:12px; margin:0 0 10px; padding:0 20px }}
+.faq details[open] {{ border-color:#4a3c2c }}
+.faq summary {{ cursor:pointer; padding:16px 0; font-weight:600; list-style:none; display:flex; justify-content:space-between; gap:16px }}
+.faq summary::-webkit-details-marker {{ display:none }}
+.faq summary::after {{ content:"+"; color:var(--gold); font-size:22px; line-height:1 }}
+.faq details[open] summary::after {{ content:"\\2212" }}
+.faq details p {{ margin:0 0 16px; color:#d9cdb8 }}
+
 /* dialog */
 dialog {{ width:min(1000px, calc(100vw - 32px)); max-height:calc(100vh - 32px); padding:0; border:1px solid var(--line);
           border-radius:16px; background:var(--panel); color:var(--text) }}
@@ -203,6 +231,7 @@ footer img {{ width:28px; height:28px; vertical-align:middle; margin-right:8px }
   <ul>
     {navlinks}
     <li><a href="#install">Install</a></li>
+    <li class="opt"><a href="#faq">FAQ</a></li>
     <li class="opt"><a href="{repo}/issues">Report a bug</a></li>
   </ul>
 </div></nav>
@@ -237,6 +266,11 @@ footer img {{ width:28px; height:28px; vertical-align:middle; margin-right:8px }
   </div>
   <p class="note"><b>Updating:</b> remove the old version in your mod manager, then add the new zip from this page.</p>
 </section>
+
+<section class="faq" id="faq">
+  <h2>FAQ</h2>
+{faq}
+</section>
 </main>
 
 <footer><div class="wrap">
@@ -244,6 +278,10 @@ footer img {{ width:28px; height:28px; vertical-align:middle; margin-right:8px }
   <span>Questions or bugs: <a href="{repo}/issues">open an issue on GitHub</a></span>
 </div></footer>
 <script>
+document.querySelectorAll(".ba").forEach(function (b) {{
+  var r = b.querySelector("input");
+  r.addEventListener("input", function () {{ b.style.setProperty("--pos", r.value + "%"); }});
+}});
 document.querySelectorAll("[data-open]").forEach(function (b) {{
   b.addEventListener("click", function () {{ document.getElementById(b.dataset.open).showModal(); }});
 }});
@@ -285,7 +323,51 @@ CARD = """<section class="mod" id="{key}" style="--accent:{accent}">
   <div class="dlg-head"><h2>{name}</h2><a class="btn" href="downloads/{zip}" download>Download {version}</a>
     <button class="close" aria-label="Close">&times;</button></div>
   <div class="dlg-body">{gallery}<div class="desc">{details}</div></div>
-</dialog>"""
+</dialog>
+{extra}"""
+
+COMPARE = """<section class="compare" style="--accent:{accent}">
+  <h3>Before and after</h3>
+  <p>The same spot at 4:3 stretched: the stock HUD, then de-stretched and resized with HUD Fit. Drag to compare.</p>
+  <div class="ba">
+    <img src="{before}" alt="Deadlock HUD stretched at 4:3, without HUD Fit">
+    <img class="after" src="{after}" alt="Deadlock HUD de-stretched and resized with HUD Fit">
+    <span class="lbl l">Before</span><span class="lbl r">With HUD Fit</span>
+    <div class="bar"></div>
+    <input type="range" min="0" max="100" value="50" aria-label="Before / after">
+  </div>
+</section>"""
+
+# question, answer (plain text; also used for the search-engine FAQ data)
+FAQ = [
+    ("How do I de-stretch the HUD when playing Deadlock 4:3 stretched?",
+     "Install HUD Fit, press Esc and choose HUD Fit, open the HUD tab and pick the 4:3 stretch preset. Then turn on "
+     "De-stretch everything, or de-stretch only the elements you choose."),
+    ("How do I make the Deadlock UI or shop smaller or bigger?",
+     "In HUD Fit, use Scale all items in the HUD tab for the whole HUD. To resize one element, select it (for example "
+     "Buy menu (shop) under Layers) and change Size %, or drag its corner handle."),
+    ("How do I get a 4:3 resolution in Deadlock?",
+     "Install 4:3 Video, then pick 4x3 under Settings, Video, Aspect Ratio. If the resolution you want is not listed, "
+     "add it as a custom resolution in your graphics driver (AMD Adrenalin, NVIDIA Control Panel or CRU) first."),
+    ("Do these mods work together?",
+     "Yes. They change different game files. HUD Fit conflicts with other mods that replace base_hud or "
+     "hud_escape_menu, and Hero Select Plus conflicts with other hero select mods."),
+    ("A game update broke something. What now?",
+     "Turn the mod off in your mod manager until an updated version is posted on this page."),
+]
+
+
+def faq_html():
+    return "\n".join("  <details><summary>%s</summary><p>%s</p></details>" % (html.escape(q), html.escape(a))
+                      for q, a in FAQ)
+
+
+def faq_ld():
+    import json
+    data = {"@context": "https://schema.org", "@type": "FAQPage",
+            "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+                           for q, a in FAQ]}
+    return json.dumps(data).replace("</", "<\\/")
 
 
 def gallery_html(m):
@@ -312,6 +394,29 @@ def gallery_html(m):
             '<div class="thumbs">%s</div>' % (big, full, html.escape(cap), thumbs))
 
 
+SITE = "https://greeb.github.io/mods/"
+
+
+def badge_text(t):
+    return t.replace("-", "--").replace("_", "__").replace(" ", "%20").replace(":", "%3A")
+
+
+def update_readme(versions):
+    """Fills the <!--dl:key--> markers in README.md with a download button for the current version."""
+    path = os.path.join(HERE, "README.md")
+    text = open(path, encoding="utf-8").read()
+    for m in MODS:
+        version, zipname = versions[m["key"]]
+        label = "Download %s v%s" % (m["name"], version)
+        badge = ("[![%s](https://img.shields.io/badge/%s-%s-%s?style=for-the-badge)](%sdownloads/%s)"
+                 % (label, badge_text("Download"), badge_text("%s v%s" % (m["name"], version)),
+                    m["accent"].lstrip("#"), SITE, zipname))
+        text = re.sub(r"<!--dl:%s-->.*?<!--/dl-->" % m["key"], lambda _: "<!--dl:%s-->%s<!--/dl-->" % (m["key"], badge),
+                      text, flags=re.S)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
+
+
 def main():
     os.makedirs(os.path.join(DOCS, "img"), exist_ok=True)
     os.makedirs(os.path.join(DOCS, "downloads"), exist_ok=True)
@@ -319,9 +424,10 @@ def main():
     old_avatar = os.path.join(DOCS, "img/avatar.png")
     if os.path.exists(old_avatar):
         os.remove(old_avatar)
-    cards, keep = [], set()
+    cards, keep, versions = [], set(), {}
     for m in MODS:
         version, zipname = latest_zip(m)
+        versions[m["key"]] = (version, zipname)
         shutil.copyfile(os.path.join(m["dist"], zipname), os.path.join(DOCS, "downloads", zipname))
         keep.add(zipname)
         jpg(os.path.join(BRANDING, "out", m["key"] + ".png"), os.path.join(DOCS, "img", m["key"] + ".jpg"), 960)
@@ -330,7 +436,11 @@ def main():
         cards.append(CARD.format(accent=m["accent"], key=m["key"], name=html.escape(m["name"]),
                                  tagline=html.escape(m["tagline"]), version=version, size=size, points=points,
                                  zip=zipname, details=details_html(m["folder"]), gallery=gallery_html(m),
-                                 more="Details &amp; screenshots" if m.get("shots") else "Details"))
+                                 more="Details &amp; screenshots" if m.get("shots") else "Details",
+                                 extra=COMPARE.format(accent=m["accent"],
+                                                      before="img/shots/%s_%d.jpg" % (m["key"], m["compare"][0]),
+                                                      after="img/shots/%s_%d.jpg" % (m["key"], m["compare"][1]))
+                                 if m.get("compare") else ""))
         print("%-17s v%s  %s" % (m["name"], version, zipname))
     # old versions are dropped from the site (the git history keeps them)
     for f in os.listdir(os.path.join(DOCS, "downloads")):
@@ -339,8 +449,10 @@ def main():
     with open(os.path.join(DOCS, "index.html"), "w", encoding="utf-8") as f:
         navlinks = "\n    ".join('<li class="opt"><a href="#%s">%s</a></li>' % (m["key"], html.escape(m["name"])) for m in MODS)
         chips = "".join('<a href="#%s" style="--c:%s"><i></i>%s</a>' % (m["key"], m["accent"], html.escape(m["name"])) for m in MODS)
-        f.write(PAGE.format(cards="\n".join(cards), repo=REPO, navlinks=navlinks, chips=chips))
+        f.write(PAGE.format(cards="\n".join(cards), repo=REPO, navlinks=navlinks, chips=chips,
+                            faq=faq_html(), faq_ld=faq_ld()))
     open(os.path.join(DOCS, ".nojekyll"), "w").close()
+    update_readme(versions)
     print("wrote", os.path.join(DOCS, "index.html"))
 
 
