@@ -186,6 +186,6 @@ Yes. They change different game files. HUD Fit conflicts with other mods that re
 
 <div align="center">
 <img src="docs/img/logo.png" width="36" alt=""><br>
-<sub>Made by dirtytomat0, with AI. Not affiliated with Valve.<br>
+<sub>Not affiliated with Valve.<br>
 Questions or bugs: <a href="https://github.com/GREEB/mods/issues">open an issue</a>.</sub>
 </div>

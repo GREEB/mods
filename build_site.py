@@ -299,7 +299,7 @@ footer img {{ width:28px; height:28px; vertical-align:middle; margin-right:8px }
 </main>
 
 <footer><div class="wrap">
-  <span><img src="img/logo.png" alt="">Made by dirtytomat0, with AI. Not affiliated with Valve.</span>
+  <span><img src="img/logo.png" alt="">Not affiliated with Valve.</span>
   <span>Questions or bugs: <a href="{repo}/issues">open an issue on GitHub</a></span>
 </div></footer>
 <script>
