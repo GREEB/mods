@@ -38,7 +38,7 @@ of the way.
 
 <!--dl:hudfit-->
 
-[![Download HUD Fit v1.2.1](https://img.shields.io/badge/Download-HUD%20Fit%20v1.2.1-ffc83c?style=for-the-badge)](https://greeb.github.io/mods/downloads/hud_fit_v1.2.1.zip)
+[![Download HUD Fit v1.2.2](https://img.shields.io/badge/Download-HUD%20Fit%20v1.2.2-ffc83c?style=for-the-badge)](https://greeb.github.io/mods/downloads/hud_fit_v1.2.2.zip)
 
 <!--/dl-->
 
