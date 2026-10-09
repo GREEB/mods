@@ -1,3 +1,7 @@
+> **Moved:** the site now lives at **https://mods.frogtech.dev** (the layout site in GREEB/deadlock-uikit,
+> `site/`, imports these mods' pages with `scripts/import_mods.py`). The GitHub Pages pages here only redirect
+> there; `build_site.py` would overwrite the redirects, so publish new versions through the new site instead.
+
 <div align="center">
 
 <img src="docs/img/logo.png" width="110" alt="dirtytomat0 logo">

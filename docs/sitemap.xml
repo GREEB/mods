@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://greeb.github.io/mods/</loc><lastmod>2026-10-05</lastmod></url>
-  <url><loc>https://greeb.github.io/mods/hud-fit/</loc><lastmod>2026-10-05</lastmod></url>
-  <url><loc>https://greeb.github.io/mods/4-3-video/</loc><lastmod>2026-10-05</lastmod></url>
-  <url><loc>https://greeb.github.io/mods/hero-select-plus/</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://mods.frogtech.dev/</loc></url>
+  <url><loc>https://mods.frogtech.dev/hud-fit</loc></url>
+  <url><loc>https://mods.frogtech.dev/4-3-video</loc></url>
+  <url><loc>https://mods.frogtech.dev/hero-select-plus</loc></url>
 </urlset>
